@@ -1,0 +1,555 @@
+<html>
+<head>
+<title>QUICK_START.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #c77dbb; font-style: italic;}
+.s4 { color: #6aab73;}
+.s5 { color: #56a8f5;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+QUICK_START.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">AIVALA v2.0 - Quick Start Guide</span>
+
+<span class="s0">## </span><span class="s2">🚀 For Developers</span>
+
+<span class="s0">### </span><span class="s2">What's New in v2.0</span>
+
+<span class="s2">Three major updates</span><span class="s1">:</span>
+<span class="s0">1. </span><span class="s2">✅ </span><span class="s1">**</span><span class="s2">Health Insurance Removed</span><span class="s1">** </span><span class="s2">- Only Auto &amp; Property now</span>
+<span class="s0">2. </span><span class="s2">✅ </span><span class="s1">**</span><span class="s2">Face Visibility Required</span><span class="s1">** </span><span class="s2">- No more face blurring</span>
+<span class="s0">3. </span><span class="s2">✅ </span><span class="s1">**</span><span class="s2">Offline Mode Added</span><span class="s1">** </span><span class="s2">- Record claims without internet</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📦 Installation &amp; Setup</span>
+
+<span class="s0">### </span><span class="s2">Prerequisites</span>
+<span class="s0">- </span><span class="s2">Node.js 18+</span>
+<span class="s0">- </span><span class="s2">npm or pnpm</span>
+<span class="s0">- </span><span class="s2">Modern browser</span>
+
+<span class="s0">### </span><span class="s2">Getting Started</span>
+
+<span class="s0">```</span><span class="s3">bash</span>
+<span class="s4"># Install dependencies (if not already done)</span>
+<span class="s4">npm install</span>
+
+<span class="s4"># Start development server</span>
+<span class="s4">npm run dev</span>
+
+<span class="s4"># Build for production</span>
+<span class="s4">npm run build</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🗺️ Project Structure</span>
+
+<span class="s0">```</span>
+<span class="s4">/src/app</span>
+<span class="s4">├── components/</span>
+<span class="s4">│   ├── ui/                    # Shadcn UI components</span>
+<span class="s4">│   ├── OfflineSync.tsx        # NEW: Offline status component</span>
+<span class="s4">│   └── Root.tsx               # Updated: Added Toaster</span>
+<span class="s4">│</span>
+<span class="s4">├── pages/</span>
+<span class="s4">│   ├── mobile/                # 15 mobile screens</span>
+<span class="s4">│   │   ├── Dashboard.tsx      # Updated: Offline sync card</span>
+<span class="s4">│   │   ├── NewClaimType.tsx   # Updated: Only Auto/Property</span>
+<span class="s4">│   │   ├── VideoRecording.tsx # Updated: Offline support</span>
+<span class="s4">│   │   ├── Settings.tsx       # Updated: Offline controls</span>
+<span class="s4">│   │   ├── Register.tsx       # Updated: Privacy consent</span>
+<span class="s4">│   │   └── ...</span>
+<span class="s4">│   └── web/                   # 6 web dashboard screens</span>
+<span class="s4">│       ├── ClaimsManagement.tsx # Updated: Filters</span>
+<span class="s4">│       └── ...</span>
+<span class="s4">│</span>
+<span class="s4">├── utils/                     # NEW: Offline utilities</span>
+<span class="s4">│   ├── offlineStorage.ts      # Storage manager</span>
+<span class="s4">│   ├── networkStatus.ts       # Network monitoring</span>
+<span class="s4">│   └── syncManager.ts         # Sync orchestration</span>
+<span class="s4">│</span>
+<span class="s4">├── data/</span>
+<span class="s4">│   └── mockData.ts            # Updated: Removed health type</span>
+<span class="s4">│</span>
+<span class="s4">├── App.tsx</span>
+<span class="s4">└── routes.ts</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🎯 Key Features to Test</span>
+
+<span class="s0">### </span><span class="s2">1. Claim Types </span><span class="s1">(</span><span class="s2">Updated</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">Mobile App</span><span class="s1">:**</span>
+<span class="s0">```</span>
+<span class="s4">Navigate to: /app/new-claim</span>
+<span class="s4">Expected: Only see &quot;Auto&quot; and &quot;Property&quot; options</span>
+<span class="s0">```</span>
+
+<span class="s1">**</span><span class="s2">Web Dashboard</span><span class="s1">:**</span>
+<span class="s0">```</span>
+<span class="s4">Navigate to: /web/claims</span>
+<span class="s4">Filter dropdown: Only &quot;Auto&quot; and &quot;Property&quot;</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">2. Face Visibility </span><span class="s1">(</span><span class="s2">New</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">Registration</span><span class="s1">:**</span>
+<span class="s0">```</span>
+<span class="s4">Navigate to: /app/register</span>
+<span class="s4">Expected: See two consent checkboxes:</span>
+<span class="s4">- Face visibility requirement</span>
+<span class="s4">- Privacy policy agreement</span>
+<span class="s0">```</span>
+
+<span class="s1">**</span><span class="s2">Settings</span><span class="s1">:**</span>
+<span class="s0">```</span>
+<span class="s4">Navigate to: /app/settings</span>
+<span class="s4">Expected: </span>
+<span class="s4">- No &quot;Auto-blur face&quot; toggle</span>
+<span class="s4">- Privacy notice about face visibility</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">3. Offline Mode </span><span class="s1">(</span><span class="s2">New</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">Test Offline Recording</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s3">bash</span>
+<span class="s4"># In browser DevTools:</span>
+<span class="s4"># 1. Open DevTools (F12)</span>
+<span class="s4"># 2. Go to Network tab</span>
+<span class="s4"># 3. Select &quot;Offline&quot; throttling</span>
+<span class="s4"># 4. Navigate to /app/new-claim</span>
+<span class="s4"># 5. Record a claim</span>
+<span class="s4"># 6. Check localStorage for saved claim</span>
+<span class="s4"># 7. Set throttling back to &quot;Online&quot;</span>
+<span class="s4"># 8. Watch auto-sync happen</span>
+<span class="s0">```</span>
+
+<span class="s1">**</span><span class="s2">Check Storage</span><span class="s1">:**</span>
+<span class="s0">```</span>
+<span class="s4">Navigate to: /app/settings</span>
+<span class="s4">Expected: See storage usage display</span>
+<span class="s0">```</span>
+
+<span class="s1">**</span><span class="s2">Manual Sync</span><span class="s1">:**</span>
+<span class="s0">```</span>
+<span class="s4">Navigate to: /app/dashboard</span>
+<span class="s4">Expected: See &quot;Offline Sync&quot; card if claims pending</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">💻 Code Examples</span>
+
+<span class="s0">### </span><span class="s2">Using Network Status</span>
+
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">import { useNetworkStatus } from '@/app/utils/networkStatus';</span>
+
+<span class="s4">function MyComponent() {</span>
+  <span class="s4">const networkStatus = useNetworkStatus();</span>
+  
+  <span class="s4">return (</span>
+    <span class="s4">&lt;div&gt;</span>
+      <span class="s4">{networkStatus.isOnline ? (</span>
+        <span class="s4">&lt;span&gt;You're online!&lt;/span&gt;</span>
+      <span class="s4">) : (</span>
+        <span class="s4">&lt;span&gt;You're offline. Claims will sync when online.&lt;/span&gt;</span>
+      <span class="s4">)}</span>
+    <span class="s4">&lt;/div&gt;</span>
+  <span class="s4">);</span>
+<span class="s4">}</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Saving Offline Claim</span>
+
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">import { offlineStorage } from '@/app/utils/offlineStorage';</span>
+
+<span class="s4">// Save claim</span>
+<span class="s4">const claim = {</span>
+  <span class="s4">id: `OFFLINE-${Date.now()}`,</span>
+  <span class="s4">type: 'auto' as const,</span>
+  <span class="s4">status: 'draft' as const,</span>
+  <span class="s4">videoBlob: 'base64_video_data',</span>
+  <span class="s4">claimData: {</span>
+    <span class="s4">description: 'Front bumper damage',</span>
+    <span class="s4">location: 'Mumbai',</span>
+  <span class="s4">},</span>
+  <span class="s4">createdAt: new Date().toISOString(),</span>
+  <span class="s4">lastModified: new Date().toISOString(),</span>
+  <span class="s4">size: 5 * 1024 * 1024, // 5MB</span>
+<span class="s4">};</span>
+
+<span class="s4">const saved = offlineStorage.saveClaim(claim);</span>
+<span class="s4">if (saved) {</span>
+  <span class="s4">toast.success('Saved offline!');</span>
+<span class="s4">}</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Checking Storage Info</span>
+
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">import { offlineStorage } from '@/app/utils/offlineStorage';</span>
+
+<span class="s4">const info = offlineStorage.getStorageInfo();</span>
+<span class="s4">console.log({</span>
+  <span class="s4">claimCount: info.claimCount,        // e.g., 3</span>
+  <span class="s4">maxClaims: info.maxClaims,          // 10</span>
+  <span class="s4">totalSize: info.totalSize,          // bytes</span>
+  <span class="s4">usagePercentage: info.usagePercentage, // e.g., 45%</span>
+  <span class="s4">pendingUploads: info.pendingUploads,  // e.g., 2</span>
+<span class="s4">});</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Manual Sync</span>
+
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">import { syncManager } from '@/app/utils/syncManager';</span>
+
+<span class="s4">// Sync now</span>
+<span class="s4">const result = await syncManager.syncNow();</span>
+<span class="s4">console.log(`Success: ${result.success}, Failed: ${result.failed}`);</span>
+
+<span class="s4">// Retry failed</span>
+<span class="s4">const retryResult = await syncManager.retryFailed();</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🧪 Testing Scenarios</span>
+
+<span class="s0">### </span><span class="s2">Scenario 1</span><span class="s1">: </span><span class="s2">Normal Online Flow</span>
+<span class="s0">```</span>
+<span class="s4">1. Open app (online)</span>
+<span class="s4">2. Login</span>
+<span class="s4">3. New Claim → Auto Insurance</span>
+<span class="s4">4. Record video</span>
+<span class="s4">5. Fill details</span>
+<span class="s4">6. Submit</span>
+<span class="s4">7. Check processing screen</span>
+<span class="s4">✓ Should work as before</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Scenario 2</span><span class="s1">: </span><span class="s2">Offline Recording</span>
+<span class="s0">```</span>
+<span class="s4">1. Open app (online)</span>
+<span class="s4">2. Login</span>
+<span class="s4">3. Go offline (airplane mode)</span>
+<span class="s4">4. New Claim → Auto Insurance</span>
+<span class="s4">5. See &quot;Offline&quot; badge</span>
+<span class="s4">6. Record video</span>
+<span class="s4">7. Fill details</span>
+<span class="s4">8. Submit</span>
+<span class="s4">9. Check Dashboard - see &quot;Offline Sync&quot; card</span>
+<span class="s4">10. Go online</span>
+<span class="s4">11. Wait 30 seconds or click &quot;Upload Now&quot;</span>
+<span class="s4">12. Verify claim uploaded</span>
+<span class="s4">✓ Should save locally and sync when online</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Scenario 3</span><span class="s1">: </span><span class="s2">Multiple Offline Claims</span>
+<span class="s0">```</span>
+<span class="s4">1. Go offline</span>
+<span class="s4">2. Create 3 claims</span>
+<span class="s4">3. Check Settings → Storage usage</span>
+<span class="s4">4. Check Dashboard → Offline Sync card shows &quot;3 claims&quot;</span>
+<span class="s4">5. Go online</span>
+<span class="s4">6. Watch auto-sync</span>
+<span class="s4">7. All 3 should upload successfully</span>
+<span class="s4">✓ Should handle multiple claims</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Scenario 4</span><span class="s1">: </span><span class="s2">Storage Limit</span>
+<span class="s0">```</span>
+<span class="s4">1. Go offline</span>
+<span class="s4">2. Try to create 11th claim (limit is 10)</span>
+<span class="s4">3. Should see error</span>
+<span class="s4">4. Go online and sync</span>
+<span class="s4">5. Now can create new claims</span>
+<span class="s4">✓ Should enforce 10-claim limit</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🐛 Common Issues &amp; Fixes</span>
+
+<span class="s0">### </span><span class="s2">Issue 1</span><span class="s1">: &quot;</span><span class="s2">Cannot read property of undefined</span><span class="s1">&quot;</span>
+<span class="s1">**</span><span class="s2">Cause</span><span class="s1">:** </span><span class="s2">Network status not initialized</span>
+<span class="s1">**</span><span class="s2">Fix</span><span class="s1">:** </span><span class="s2">Ensure useNetworkStatus hook is called in component</span>
+
+<span class="s0">### </span><span class="s2">Issue 2</span><span class="s1">: </span><span class="s2">Claims not syncing</span>
+<span class="s1">**</span><span class="s2">Cause</span><span class="s1">:** </span><span class="s2">Auto-sync disabled or no network</span>
+<span class="s1">**</span><span class="s2">Fix</span><span class="s1">:** </span>
+<span class="s0">- </span><span class="s2">Check Settings → Enable auto-sync</span>
+<span class="s0">- </span><span class="s2">Verify online status</span>
+<span class="s0">- </span><span class="s2">Try manual sync</span>
+
+<span class="s0">### </span><span class="s2">Issue 3</span><span class="s1">: </span><span class="s2">Storage full error</span>
+<span class="s1">**</span><span class="s2">Cause</span><span class="s1">:** </span><span class="s2">100MB or 10 claims limit reached</span>
+<span class="s1">**</span><span class="s2">Fix</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Click </span><span class="s1">&quot;</span><span class="s2">Upload Now</span><span class="s1">&quot; </span><span class="s2">to sync pending</span>
+<span class="s0">- </span><span class="s2">Or </span><span class="s1">&quot;</span><span class="s2">Clear Offline Data</span><span class="s1">&quot; </span><span class="s2">in Settings</span>
+
+<span class="s0">### </span><span class="s2">Issue 4</span><span class="s1">: </span><span class="s2">TypeScript errors</span>
+<span class="s1">**</span><span class="s2">Cause</span><span class="s1">:** </span><span class="s2">Type definitions not matching</span>
+<span class="s1">**</span><span class="s2">Fix</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">// Use 'auto' | 'property' only</span>
+<span class="s4">type: 'auto' as const  // ✓ Correct</span>
+<span class="s4">type: 'health' as const // ✗ Wrong - removed</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📝 Best Practices</span>
+
+<span class="s0">### </span><span class="s2">For Components</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Always check network status for claim flows</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">const networkStatus = useNetworkStatus();</span>
+<span class="s4">if (!networkStatus.isOnline) {</span>
+  <span class="s4">// Show offline message</span>
+  <span class="s4">// Save to localStorage</span>
+<span class="s4">}</span>
+<span class="s0">```</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Use toast notifications</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">import { toast } from 'sonner';</span>
+<span class="s4">toast.success('Claim saved offline!');</span>
+<span class="s4">toast.error('Upload failed');</span>
+<span class="s4">toast.info('Syncing...');</span>
+<span class="s0">```</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Handle loading states</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">const [isSyncing, setIsSyncing] = useState(false);</span>
+<span class="s4">// Show loading indicator while syncing</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">For Data Handling</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Only use valid claim types</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">type ClaimType = 'auto' | 'property'; // No 'health'</span>
+<span class="s0">```</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Encrypt sensitive data</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">// Use offlineStorage methods (already encrypted)</span>
+<span class="s4">offlineStorage.saveClaim(claim);</span>
+<span class="s0">```</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Clean up after sync</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s3">typescript</span>
+<span class="s4">// Automatically done by syncManager</span>
+<span class="s4">// But can manually delete if needed</span>
+<span class="s4">offlineStorage.deleteClaim(claimId);</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🎨 UI/UX Guidelines</span>
+
+<span class="s0">### </span><span class="s2">Network Status Badge</span>
+
+<span class="s1">**</span><span class="s2">Always show on claim-related screens</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">New Claim Type</span>
+<span class="s0">- </span><span class="s2">Video Recording</span>
+<span class="s0">- </span><span class="s2">Claim Details</span>
+
+<span class="s1">**</span><span class="s2">Colors</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Online</span><span class="s1">: </span><span class="s2">Blue </span><span class="s1">(</span><span class="s2">#2563EB</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Offline</span><span class="s1">: </span><span class="s2">Gray </span><span class="s1">(</span><span class="s2">secondary</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Offline Sync Card</span>
+
+<span class="s1">**</span><span class="s2">Show on Dashboard only when</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Claims exist in offline storage</span>
+<span class="s0">- </span><span class="s2">Hide when all synced</span>
+
+<span class="s1">**</span><span class="s2">Update frequency</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Every 5 seconds</span>
+<span class="s0">- </span><span class="s2">Or on user action</span>
+
+<span class="s0">### </span><span class="s2">Toast Notifications</span>
+
+<span class="s1">**</span><span class="s2">Use for</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Claim saved offline</span>
+<span class="s0">- </span><span class="s2">Sync started</span>
+<span class="s0">- </span><span class="s2">Sync completed</span>
+<span class="s0">- </span><span class="s2">Sync failed</span>
+<span class="s0">- </span><span class="s2">Storage warnings</span>
+
+<span class="s1">**</span><span class="s2">Duration</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Success</span><span class="s1">: </span><span class="s2">3 seconds</span>
+<span class="s0">- </span><span class="s2">Error</span><span class="s1">: </span><span class="s2">5 seconds</span>
+<span class="s0">- </span><span class="s2">Info</span><span class="s1">: </span><span class="s2">3 seconds</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🔍 Debugging Tips</span>
+
+<span class="s0">### </span><span class="s2">Check LocalStorage</span>
+
+<span class="s0">```</span><span class="s3">javascript</span>
+<span class="s4">// In browser console:</span>
+<span class="s4">// View offline claims</span>
+<span class="s4">JSON.parse(localStorage.getItem('aivala_offline_claims'))</span>
+
+<span class="s4">// View sync queue</span>
+<span class="s4">JSON.parse(localStorage.getItem('aivala_sync_queue'))</span>
+
+<span class="s4">// Clear all (for testing)</span>
+<span class="s4">localStorage.clear()</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Network Simulation</span>
+
+<span class="s0">```</span><span class="s3">javascript</span>
+<span class="s4">// Force offline in console</span>
+<span class="s4">Object.defineProperty(navigator, 'onLine', {</span>
+  <span class="s4">writable: true,</span>
+  <span class="s4">value: false</span>
+<span class="s4">});</span>
+
+<span class="s4">// Force online</span>
+<span class="s4">Object.defineProperty(navigator, 'onLine', {</span>
+  <span class="s4">writable: true,</span>
+  <span class="s4">value: true</span>
+<span class="s4">});</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Monitor Sync Events</span>
+
+<span class="s0">```</span><span class="s3">javascript</span>
+<span class="s4">// Add logging in syncManager.ts</span>
+<span class="s4">console.log('Sync started');</span>
+<span class="s4">console.log('Uploading claim:', claimId);</span>
+<span class="s4">console.log('Sync result:', result);</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📚 Resources</span>
+
+<span class="s0">### </span><span class="s2">Documentation</span>
+<span class="s0">- </span><span class="s2">`CHANGELOG.md` - What changed</span>
+<span class="s0">- </span><span class="s2">`FEATURES.md` - All features</span>
+<span class="s0">- </span><span class="s2">`OFFLINE_MODE_GUIDE.md` - User guide</span>
+<span class="s0">- </span><span class="s2">`IMPLEMENTATION_SUMMARY.md` - Technical details</span>
+
+<span class="s0">### </span><span class="s2">Code References</span>
+<span class="s0">- </span><span class="s2">`/src/app/utils/` - Offline utilities</span>
+<span class="s0">- </span><span class="s2">`/src/app/components/OfflineSync.tsx` - Sync UI</span>
+<span class="s0">- </span><span class="s2">`/src/app/data/mockData.ts` - Data models</span>
+
+<span class="s0">### </span><span class="s2">External Links</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">Shadcn UI</span><span class="s1">](</span><span class="s5">https://ui.shadcn.com/</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">Tailwind CSS</span><span class="s1">](</span><span class="s5">https://tailwindcss.com/</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">Lucide Icons</span><span class="s1">](</span><span class="s5">https://lucide.dev/</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">React Router</span><span class="s1">](</span><span class="s5">https://reactrouter.com/</span><span class="s1">)</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">✅ Pre-deployment Checklist</span>
+
+<span class="s2">Before deploying to production</span><span class="s1">:</span>
+
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test all claim types </span><span class="s1">(</span><span class="s2">Auto, Property</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test offline recording</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test auto-sync</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test manual sync</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test storage limits</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test privacy consent flow</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test across browsers</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test on mobile devices</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Check TypeScript compilation</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Check console for errors</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Review network requests</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test with slow connection</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Verify localStorage usage</span>
+<span class="s0">- </span><span class="s1">[ ] </span><span class="s2">Test edge cases</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🚦 Quick Commands</span>
+
+<span class="s0">```</span><span class="s3">bash</span>
+<span class="s4"># Development</span>
+<span class="s4">npm run dev              # Start dev server</span>
+
+<span class="s4"># Build</span>
+<span class="s4">npm run build           # Production build</span>
+
+<span class="s4"># Testing (manual)</span>
+<span class="s4"># 1. Open browser DevTools</span>
+<span class="s4"># 2. Go to Network tab</span>
+<span class="s4"># 3. Toggle offline/online</span>
+<span class="s4"># 4. Check Application → Local Storage</span>
+
+<span class="s4"># Inspect bundle</span>
+<span class="s4">npm run build           # Then check dist/ folder</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">💡 Tips</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Use React DevTools</span><span class="s1">** </span><span class="s2">to inspect component state</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Use Network tab</span><span class="s1">** </span><span class="s2">to simulate offline</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Clear localStorage</span><span class="s1">** </span><span class="s2">between tests</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Check console</span><span class="s1">** </span><span class="s2">for errors/warnings</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Test on multiple browsers</span><span class="s1">** (</span><span class="s2">Chrome, Firefox, Safari</span><span class="s1">)</span>
+<span class="s0">6. </span><span class="s1">**</span><span class="s2">Use mobile view</span><span class="s1">** </span><span class="s2">in DevTools for mobile testing</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🎓 Learning Resources</span>
+
+<span class="s0">### </span><span class="s2">For Offline Mode</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">IndexedDB API</span><span class="s1">](</span><span class="s5">https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">Service Workers</span><span class="s1">](</span><span class="s5">https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">Background Sync</span><span class="s1">](</span><span class="s5">https://developer.chrome.com/docs/workbox/modules/workbox-background-sync/</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">For TypeScript</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">TypeScript Handbook</span><span class="s1">](</span><span class="s5">https://www.typescriptlang.org/docs/handbook/intro.html</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">React TypeScript Cheatsheet</span><span class="s1">](</span><span class="s5">https://react-typescript-cheatsheet.netlify.app/</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">For React</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">React Hooks</span><span class="s1">](</span><span class="s5">https://react.dev/reference/react</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">[</span><span class="s2">Custom Hooks</span><span class="s1">](</span><span class="s5">https://react.dev/learn/reusing-logic-with-custom-hooks</span><span class="s1">)</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🆘 Need Help?</span>
+
+<span class="s0">1. </span><span class="s2">Check documentation files first</span>
+<span class="s0">2. </span><span class="s2">Review code comments in utility files</span>
+<span class="s0">3. </span><span class="s2">Check browser console for errors</span>
+<span class="s0">4. </span><span class="s2">Verify network status</span>
+<span class="s0">5. </span><span class="s2">Test in incognito mode </span><span class="s1">(</span><span class="s2">clean state</span><span class="s1">)</span>
+
+<span class="s0">---</span>
+
+<span class="s1">**</span><span class="s2">Version</span><span class="s1">:** </span><span class="s2">2.0.0  </span>
+<span class="s1">**</span><span class="s2">Last Updated</span><span class="s1">:** </span><span class="s2">January 24, 2026  </span>
+<span class="s1">**</span><span class="s2">Status</span><span class="s1">:** </span><span class="s2">Ready for Development ✅</span>
+
+<span class="s2">Happy coding</span><span class="s1">! </span><span class="s2">🚀</span>
+</pre>
+</body>
+</html>

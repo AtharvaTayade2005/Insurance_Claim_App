@@ -1,0 +1,470 @@
+<html>
+<head>
+<title>OFFLINE_MODE_GUIDE.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #c77dbb; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+OFFLINE_MODE_GUIDE.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">AIVALA Offline Mode - Quick Guide</span>
+
+<span class="s0">## </span><span class="s2">🌐 Overview</span>
+
+<span class="s2">Offline Mode allows users to record insurance claim videos and fill forms without an internet connection. Claims are saved locally and automatically uploaded when connectivity is restored.</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🎯 Key Benefits</span>
+
+<span class="s0">### </span><span class="s2">For Users in Areas with Poor Connectivity</span>
+<span class="s0">- </span><span class="s2">✅ No interruption in claim process</span>
+<span class="s0">- </span><span class="s2">✅ Save data on mobile networks</span>
+<span class="s0">- </span><span class="s2">✅ Work from remote locations</span>
+<span class="s0">- </span><span class="s2">✅ No need to wait for WiFi</span>
+
+<span class="s0">### </span><span class="s2">Technical Advantages</span>
+<span class="s0">- </span><span class="s2">✅ Better user retention</span>
+<span class="s0">- </span><span class="s2">✅ Reduced abandonment rate</span>
+<span class="s0">- </span><span class="s2">✅ Smoother user experience</span>
+<span class="s0">- </span><span class="s2">✅ Competitive differentiation</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🔧 How It Works</span>
+
+<span class="s0">### </span><span class="s2">User Flow</span>
+
+<span class="s0">```</span>
+<span class="s3">1. Open AIVALA App</span>
+   <span class="s3">↓</span>
+<span class="s3">2. Network Status Detected</span>
+   <span class="s3">- Online: Green badge &quot;Online&quot;</span>
+   <span class="s3">- Offline: Gray badge &quot;Offline&quot;</span>
+   <span class="s3">↓</span>
+<span class="s3">3. Start New Claim</span>
+   <span class="s3">- Select Auto or Property insurance</span>
+   <span class="s3">- See &quot;Offline Mode Available&quot; message if offline</span>
+   <span class="s3">↓</span>
+<span class="s3">4. Record Video</span>
+   <span class="s3">- Camera works without internet</span>
+   <span class="s3">- Video saved locally (encrypted)</span>
+   <span class="s3">- &quot;Saved for upload&quot; toast message</span>
+   <span class="s3">↓</span>
+<span class="s3">5. Fill Claim Details</span>
+   <span class="s3">- All forms work offline</span>
+   <span class="s3">- Auto-save every 30 seconds</span>
+   <span class="s3">- Data stored in browser localStorage</span>
+   <span class="s3">↓</span>
+<span class="s3">6. Submit Claim</span>
+   <span class="s3">- Added to upload queue</span>
+   <span class="s3">- Shows in &quot;Offline Sync&quot; card on Dashboard</span>
+   <span class="s3">↓</span>
+<span class="s3">7. Network Restored</span>
+   <span class="s3">- Auto-sync starts (checks every 30s)</span>
+   <span class="s3">- Upload progress shown</span>
+   <span class="s3">- Notification on completion</span>
+   <span class="s3">↓</span>
+<span class="s3">8. Claim Processed</span>
+   <span class="s3">- AI verification begins</span>
+   <span class="s3">- Results available in 5-10 minutes</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📱 User Interface Elements</span>
+
+<span class="s0">### </span><span class="s2">Network Status Badge</span>
+<span class="s1">**</span><span class="s2">Location</span><span class="s1">:** </span><span class="s2">Top-right corner on claim screens</span>
+
+<span class="s1">**</span><span class="s2">Online</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Green badge</span>
+<span class="s0">- </span><span class="s2">WiFi icon</span>
+<span class="s0">- </span><span class="s2">Text</span><span class="s1">: &quot;</span><span class="s2">Online</span><span class="s1">&quot;</span>
+
+<span class="s1">**</span><span class="s2">Offline</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Gray badge</span>
+<span class="s0">- </span><span class="s2">WiFi-off icon</span>
+<span class="s0">- </span><span class="s2">Text</span><span class="s1">: &quot;</span><span class="s2">Offline</span><span class="s1">&quot;</span>
+
+<span class="s0">### </span><span class="s2">Offline Sync Card</span>
+<span class="s1">**</span><span class="s2">Location</span><span class="s1">:** </span><span class="s2">Dashboard </span><span class="s1">(</span><span class="s2">appears only when offline claims exist</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">Shows</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Total offline claims count</span>
+<span class="s0">- </span><span class="s2">Pending uploads count</span>
+<span class="s0">- </span><span class="s2">Failed uploads count</span>
+<span class="s0">- </span><span class="s2">Storage usage bar</span>
+<span class="s0">- </span><span class="s2">Manual sync button</span>
+<span class="s0">- </span><span class="s2">Retry failed button</span>
+
+<span class="s1">**</span><span class="s2">Example</span><span class="s1">:**</span>
+<span class="s0">```</span>
+<span class="s3">┌─────────────────────────────────┐</span>
+<span class="s3">│ 🌐 Offline Claims      [Online] │</span>
+<span class="s3">├─────────────────────────────────┤</span>
+<span class="s3">│  Total: 3  Pending: 2  Failed: 1│</span>
+<span class="s3">│                                  │</span>
+<span class="s3">│  Storage: [████████░░] 45%      │</span>
+<span class="s3">│  45 MB / 100 MB                 │</span>
+<span class="s3">│                                  │</span>
+<span class="s3">│  [Upload 2 Claims]              │</span>
+<span class="s3">│  [Retry 1 Failed Upload]        │</span>
+<span class="s3">└─────────────────────────────────┘</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Settings Page</span>
+<span class="s1">**</span><span class="s2">Offline Mode Section</span><span class="s1">:**</span>
+
+<span class="s0">```</span>
+<span class="s3">┌─────────────────────────────────┐</span>
+<span class="s3">│ Offline Mode                    │</span>
+<span class="s3">├─────────────────────────────────┤</span>
+<span class="s3">│ □ Enable Offline Mode           │</span>
+<span class="s3">│   Record claims without internet│</span>
+<span class="s3">│                                  │</span>
+<span class="s3">│ □ Auto-sync when online         │</span>
+<span class="s3">│   Upload claims automatically   │</span>
+<span class="s3">│                                  │</span>
+<span class="s3">│ Offline Claims: 3 / 10          │</span>
+<span class="s3">│ Storage Used: 45 MB / 100 MB    │</span>
+<span class="s3">│ Pending Uploads: 2              │</span>
+<span class="s3">│                                  │</span>
+<span class="s3">│ [Clear Offline Data]            │</span>
+<span class="s3">└─────────────────────────────────┘</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">💾 Storage Details</span>
+
+<span class="s0">### </span><span class="s2">Limits</span>
+
+<span class="s0">| </span><span class="s1">Item </span><span class="s0">| </span><span class="s1">Limit </span><span class="s0">| </span><span class="s1">Reason </span><span class="s0">|</span>
+<span class="s0">|------|-------|--------|</span>
+<span class="s0">| </span><span class="s1">Max Claims </span><span class="s0">| </span><span class="s1">10 </span><span class="s0">| </span><span class="s1">Prevent storage bloat </span><span class="s0">|</span>
+<span class="s0">| </span><span class="s1">Max Storage </span><span class="s0">| </span><span class="s1">100 MB </span><span class="s0">| </span><span class="s1">Browser localStorage limit </span><span class="s0">|</span>
+<span class="s0">| </span><span class="s1">Video Size </span><span class="s0">| </span><span class="s1">~5-10 MB each </span><span class="s0">| </span><span class="s1">Compressed format </span><span class="s0">|</span>
+<span class="s0">| </span><span class="s1">Auto-delete </span><span class="s0">| </span><span class="s1">After upload </span><span class="s0">| </span><span class="s1">Free up space </span><span class="s0">|</span>
+
+<span class="s0">### </span><span class="s2">What Gets Stored</span>
+
+<span class="s1">**</span><span class="s2">Stored Locally</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Video data </span><span class="s1">(</span><span class="s2">Base64 encoded</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Claim form data</span>
+<span class="s0">- </span><span class="s2">Location information</span>
+<span class="s0">- </span><span class="s2">Timestamp metadata</span>
+<span class="s0">- </span><span class="s2">Claim ID</span>
+
+<span class="s1">**</span><span class="s2">NOT Stored</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">User credentials</span>
+<span class="s0">- </span><span class="s2">Payment information</span>
+<span class="s0">- </span><span class="s2">AI processing results</span>
+<span class="s0">- </span><span class="s2">Historical claims</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🔄 Sync Behavior</span>
+
+<span class="s0">### </span><span class="s2">Automatic Sync</span>
+
+<span class="s1">**</span><span class="s2">When It Happens</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Network connection restored </span><span class="s1">(</span><span class="s2">immediate</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Every 30 seconds while online</span>
+<span class="s0">- </span><span class="s2">App reopened while online</span>
+<span class="s0">- </span><span class="s2">Manual sync button pressed</span>
+
+<span class="s1">**</span><span class="s2">Priority Order</span><span class="s1">:**</span>
+<span class="s0">1. </span><span class="s2">Oldest claims first</span>
+<span class="s0">2. </span><span class="s2">Smallest file size first</span>
+<span class="s0">3. </span><span class="s2">Failed uploads retried last</span>
+
+<span class="s0">### </span><span class="s2">Manual Sync</span>
+
+<span class="s1">**</span><span class="s2">When to Use</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Want to upload immediately</span>
+<span class="s0">- </span><span class="s2">Retry failed uploads</span>
+<span class="s0">- </span><span class="s2">Check sync status</span>
+<span class="s0">- </span><span class="s2">Force refresh</span>
+
+<span class="s1">**</span><span class="s2">How to Trigger</span><span class="s1">:**</span>
+<span class="s0">1. </span><span class="s2">Go to Dashboard</span>
+<span class="s0">2. </span><span class="s2">Find </span><span class="s1">&quot;</span><span class="s2">Offline Sync</span><span class="s1">&quot; </span><span class="s2">card</span>
+<span class="s0">3. </span><span class="s2">Click </span><span class="s1">&quot;</span><span class="s2">Upload X Claims</span><span class="s1">&quot;</span>
+<span class="s0">4. </span><span class="s2">Wait for completion</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">⚠️ Important Notes</span>
+
+<span class="s0">### </span><span class="s2">Storage Warnings</span>
+
+<span class="s1">**</span><span class="s2">When storage reaches 80% </span><span class="s1">(</span><span class="s2">80 MB</span><span class="s1">):**</span>
+<span class="s0">- </span><span class="s2">Orange warning displayed</span>
+<span class="s0">- </span><span class="s2">Suggest uploading existing claims</span>
+<span class="s0">- </span><span class="s2">Still allows new claims</span>
+
+<span class="s1">**</span><span class="s2">When storage reaches 95% </span><span class="s1">(</span><span class="s2">95 MB</span><span class="s1">):**</span>
+<span class="s0">- </span><span class="s2">Red warning displayed</span>
+<span class="s0">- </span><span class="s2">Recommend clearing old claims</span>
+<span class="s0">- </span><span class="s2">May block new recordings</span>
+
+<span class="s1">**</span><span class="s2">When limit reached </span><span class="s1">(</span><span class="s2">100 MB or 10 claims</span><span class="s1">):**</span>
+<span class="s0">- </span><span class="s2">Error message shown</span>
+<span class="s0">- </span><span class="s2">Must upload or delete before new claims</span>
+<span class="s0">- </span><span class="s1">&quot;</span><span class="s2">Clear Offline Data</span><span class="s1">&quot; </span><span class="s2">option available</span>
+
+<span class="s0">### </span><span class="s2">Network Recommendations</span>
+
+<span class="s1">**</span><span class="s2">Best for Upload</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">WiFi </span><span class="s1">(</span><span class="s2">preferred</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">4G connection</span>
+<span class="s0">- </span><span class="s2">Good signal strength</span>
+
+<span class="s1">**</span><span class="s2">Works but Slower</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">3G connection</span>
+<span class="s0">- </span><span class="s2">Weak signal</span>
+<span class="s0">- </span><span class="s2">May show </span><span class="s1">&quot;</span><span class="s2">Slow connection</span><span class="s1">&quot; </span><span class="s2">warning</span>
+
+<span class="s1">**</span><span class="s2">Won't Upload</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Offline </span><span class="s1">(</span><span class="s2">obviously</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Airplane mode</span>
+<span class="s0">- </span><span class="s2">Very slow connections </span><span class="s1">(</span><span class="s2">may timeout</span><span class="s1">)</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🐛 Troubleshooting</span>
+
+<span class="s0">### </span><span class="s2">Problem</span><span class="s1">: </span><span class="s2">Claims not syncing</span>
+
+<span class="s1">**</span><span class="s2">Solutions</span><span class="s1">:**</span>
+<span class="s0">1. </span><span class="s2">Check network status badge </span><span class="s1">(</span><span class="s2">must be </span><span class="s1">&quot;</span><span class="s2">Online</span><span class="s1">&quot;)</span>
+<span class="s0">2. </span><span class="s2">Check Settings → Auto-sync is enabled</span>
+<span class="s0">3. </span><span class="s2">Try manual sync button</span>
+<span class="s0">4. </span><span class="s2">Restart app</span>
+<span class="s0">5. </span><span class="s2">Check storage space on device</span>
+
+<span class="s0">### </span><span class="s2">Problem</span><span class="s1">: &quot;</span><span class="s2">Storage limit reached</span><span class="s1">&quot; </span><span class="s2">error</span>
+
+<span class="s1">**</span><span class="s2">Solutions</span><span class="s1">:**</span>
+<span class="s0">1. </span><span class="s2">Wait for pending uploads to complete</span>
+<span class="s0">2. </span><span class="s2">Use </span><span class="s1">&quot;</span><span class="s2">Upload Now</span><span class="s1">&quot; </span><span class="s2">button to force sync</span>
+<span class="s0">3. </span><span class="s2">Clear completed claims manually</span>
+<span class="s0">4. </span><span class="s2">Delete draft claims if needed</span>
+<span class="s0">5. </span><span class="s2">Use Settings → </span><span class="s1">&quot;</span><span class="s2">Clear Offline Data</span><span class="s1">&quot; (</span><span class="s2">last resort</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Problem</span><span class="s1">: </span><span class="s2">Upload failed multiple times</span>
+
+<span class="s1">**</span><span class="s2">Solutions</span><span class="s1">:**</span>
+<span class="s0">1. </span><span class="s2">Check internet stability</span>
+<span class="s0">2. </span><span class="s2">Try on WiFi instead of mobile data</span>
+<span class="s0">3. </span><span class="s2">Wait for better signal</span>
+<span class="s0">4. </span><span class="s2">Use </span><span class="s1">&quot;</span><span class="s2">Retry Failed</span><span class="s1">&quot; </span><span class="s2">button</span>
+<span class="s0">5. </span><span class="s2">Clear and re-record if corrupted</span>
+
+<span class="s0">### </span><span class="s2">Problem</span><span class="s1">: </span><span class="s2">Video quality too low after compression</span>
+
+<span class="s1">**</span><span class="s2">Solutions</span><span class="s1">:**</span>
+<span class="s0">1. </span><span class="s2">Ensure good lighting when recording</span>
+<span class="s0">2. </span><span class="s2">Keep camera steady</span>
+<span class="s0">3. </span><span class="s2">Check camera settings</span>
+<span class="s0">4. </span><span class="s2">Update app to latest version</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🔒 Security</span>
+
+<span class="s0">### </span><span class="s2">Encryption</span>
+
+<span class="s1">**</span><span class="s2">Local Storage</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Data encrypted at rest</span>
+<span class="s0">- </span><span class="s2">AES-256 encryption</span>
+<span class="s0">- </span><span class="s2">Secure key storage</span>
+
+<span class="s1">**</span><span class="s2">During Sync</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">HTTPS/TLS encryption</span>
+<span class="s0">- </span><span class="s2">End-to-end security</span>
+<span class="s0">- </span><span class="s2">No man-in-the-middle attacks</span>
+
+<span class="s0">### </span><span class="s2">Privacy</span>
+
+<span class="s1">**</span><span class="s2">What Happens to Videos</span><span class="s1">:**</span>
+<span class="s0">1. </span><span class="s2">Recorded → Encrypted locally</span>
+<span class="s0">2. </span><span class="s2">Uploaded → Encrypted in transit</span>
+<span class="s0">3. </span><span class="s2">Processed → AI extracts frames</span>
+<span class="s0">4. </span><span class="s2">Stored → Only frames kept</span>
+<span class="s0">5. </span><span class="s2">Deleted → Raw video removed </span><span class="s1">(</span><span class="s2">24h</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">User Control</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">View all offline data</span>
+<span class="s0">- </span><span class="s2">Delete anytime</span>
+<span class="s0">- </span><span class="s2">Clear all data option</span>
+<span class="s0">- </span><span class="s2">No automatic sharing</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📊 Monitoring &amp; Analytics</span>
+
+<span class="s0">### </span><span class="s2">For Users</span>
+
+<span class="s1">**</span><span class="s2">Dashboard Shows</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Pending uploads count</span>
+<span class="s0">- </span><span class="s2">Failed uploads count</span>
+<span class="s0">- </span><span class="s2">Storage usage percentage</span>
+<span class="s0">- </span><span class="s2">Last sync time</span>
+
+<span class="s0">### </span><span class="s2">For Developers</span>
+
+<span class="s1">**</span><span class="s2">Logging</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s4">javascript</span>
+<span class="s3">// Storage info</span>
+<span class="s3">offlineStorage.getStorageInfo()</span>
+<span class="s3">// Returns:</span>
+<span class="s3">// {</span>
+<span class="s3">//   claimCount: 3,</span>
+<span class="s3">//   maxClaims: 10,</span>
+<span class="s3">//   totalSize: 47185920, // bytes</span>
+<span class="s3">//   maxSize: 104857600,</span>
+<span class="s3">//   usagePercentage: 45,</span>
+<span class="s3">//   pendingUploads: 2,</span>
+<span class="s3">//   failedUploads: 1</span>
+<span class="s3">// }</span>
+<span class="s0">```</span>
+
+<span class="s1">**</span><span class="s2">Network monitoring</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s4">javascript</span>
+<span class="s3">// Use hook</span>
+<span class="s3">const networkStatus = useNetworkStatus()</span>
+<span class="s3">// Returns:</span>
+<span class="s3">// {</span>
+<span class="s3">//   isOnline: true,</span>
+<span class="s3">//   effectiveType: '4g',</span>
+<span class="s3">//   downlink: 10, // Mbps</span>
+<span class="s3">//   rtt: 50 // ms</span>
+<span class="s3">// }</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">💡 Best Practices</span>
+
+<span class="s0">### </span><span class="s2">For Users</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Enable Auto-sync</span><span class="s1">** </span><span class="s2">- Let app handle uploads automatically</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Use WiFi</span><span class="s1">** </span><span class="s2">- Faster and doesn't use mobile data</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Clear regularly</span><span class="s1">** </span><span class="s2">- Don't let storage fill up</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Good lighting</span><span class="s1">** </span><span class="s2">- Better video quality when recording</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Stable connection</span><span class="s1">** </span><span class="s2">- Wait for good signal before manual sync</span>
+
+<span class="s0">### </span><span class="s2">For Developers</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Check storage</span><span class="s1">** </span><span class="s2">- Before allowing new recordings</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Handle errors</span><span class="s1">** </span><span class="s2">- Graceful degradation</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">User feedback</span><span class="s1">** </span><span class="s2">- Clear messages and progress</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Test offline</span><span class="s1">** </span><span class="s2">- Regularly test offline scenarios</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Monitor sync</span><span class="s1">** </span><span class="s2">- Track success/failure rates</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🎓 Tutorial</span>
+
+<span class="s0">### </span><span class="s2">First-Time User Guide</span>
+
+<span class="s1">**</span><span class="s2">Step 1</span><span class="s1">: </span><span class="s2">Enable Offline Mode</span><span class="s1">**</span>
+<span class="s0">1. </span><span class="s2">Go to Settings</span>
+<span class="s0">2. </span><span class="s2">Toggle </span><span class="s1">&quot;</span><span class="s2">Enable Offline Mode</span><span class="s1">&quot;</span>
+<span class="s0">3. </span><span class="s2">Toggle </span><span class="s1">&quot;</span><span class="s2">Auto-sync when online</span><span class="s1">&quot;</span>
+
+<span class="s1">**</span><span class="s2">Step 2</span><span class="s1">: </span><span class="s2">Record Offline Claim</span><span class="s1">**</span>
+<span class="s0">1. </span><span class="s2">Turn on Airplane Mode </span><span class="s1">(</span><span class="s2">for testing</span><span class="s1">)</span>
+<span class="s0">2. </span><span class="s2">Go to New Claim</span>
+<span class="s0">3. </span><span class="s2">See </span><span class="s1">&quot;</span><span class="s2">Offline</span><span class="s1">&quot; </span><span class="s2">badge</span>
+<span class="s0">4. </span><span class="s2">Record video normally</span>
+<span class="s0">5. </span><span class="s2">Fill claim details</span>
+<span class="s0">6. </span><span class="s2">Submit </span><span class="s1">(</span><span class="s2">saved locally</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">Step 3</span><span class="s1">: </span><span class="s2">Verify Storage</span><span class="s1">**</span>
+<span class="s0">1. </span><span class="s2">Go to Dashboard</span>
+<span class="s0">2. </span><span class="s2">See </span><span class="s1">&quot;</span><span class="s2">Offline Sync</span><span class="s1">&quot; </span><span class="s2">card</span>
+<span class="s0">3. </span><span class="s2">Check pending uploads</span><span class="s1">: </span><span class="s2">1</span>
+
+<span class="s1">**</span><span class="s2">Step 4</span><span class="s1">: </span><span class="s2">Sync When Online</span><span class="s1">**</span>
+<span class="s0">1. </span><span class="s2">Turn off Airplane Mode</span>
+<span class="s0">2. </span><span class="s2">Wait 30 seconds </span><span class="s1">(</span><span class="s2">auto-sync</span><span class="s1">)</span>
+<span class="s0">3. </span><span class="s2">Or click </span><span class="s1">&quot;</span><span class="s2">Upload Now</span><span class="s1">&quot;</span>
+<span class="s0">4. </span><span class="s2">Watch progress</span>
+<span class="s0">5. </span><span class="s2">See success message</span>
+
+<span class="s1">**</span><span class="s2">Step 5</span><span class="s1">: </span><span class="s2">Verify Upload</span><span class="s1">**</span>
+<span class="s0">1. </span><span class="s2">Check Dashboard</span>
+<span class="s0">2. </span><span class="s2">Offline Sync card disappears</span>
+<span class="s0">3. </span><span class="s2">Claim appears in history</span>
+<span class="s0">4. </span><span class="s2">Processing starts</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📞 Support</span>
+
+<span class="s0">### </span><span class="s2">Common Questions</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">How long can claims stay offline?</span><span class="s1">**</span>
+<span class="s2">A</span><span class="s1">: </span><span class="s2">No time limit, but max 10 claims or 100MB</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">Will video quality suffer?</span><span class="s1">**</span>
+<span class="s2">A</span><span class="s1">: </span><span class="s2">Minimal compression, quality maintained</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">Can I edit offline claims?</span><span class="s1">**</span>
+<span class="s2">A</span><span class="s1">: </span><span class="s2">No, once submitted locally, can't edit</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">What if I clear browser data?</span><span class="s1">**</span>
+<span class="s2">A</span><span class="s1">: </span><span class="s2">Offline claims will be lost, upload first</span><span class="s1">!</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">Does offline mode use more battery?</span><span class="s1">**</span>
+<span class="s2">A</span><span class="s1">: </span><span class="s2">Minimal impact, mostly during recording</span>
+
+<span class="s1">**</span><span class="s2">Q</span><span class="s1">: </span><span class="s2">Can I disable offline mode?</span><span class="s1">**</span>
+<span class="s2">A</span><span class="s1">: </span><span class="s2">Yes, in Settings → Offline Mode toggle</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🚀 Advanced Features </span><span class="s1">(</span><span class="s2">Future</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Planned Enhancements</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Selective Sync</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Choose which claims to upload first</span>
+   <span class="s0">- </span><span class="s2">Priority settings</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Compression Options</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">User-selectable video quality</span>
+   <span class="s0">- </span><span class="s2">Trade quality for storage</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Background Sync</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Upload while app is closed</span>
+   <span class="s0">- </span><span class="s2">Service Worker integration</span>
+
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Partial Uploads</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Resume interrupted uploads</span>
+   <span class="s0">- </span><span class="s2">Chunked upload support</span>
+
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Offline AI</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Basic quality checks offline</span>
+   <span class="s0">- </span><span class="s2">Pre-processing for faster upload</span>
+
+<span class="s0">---</span>
+
+<span class="s1">**</span><span class="s2">Version</span><span class="s1">:** </span><span class="s2">2.0.0  </span>
+<span class="s1">**</span><span class="s2">Last Updated</span><span class="s1">:** </span><span class="s2">January 24, 2026  </span>
+<span class="s1">**</span><span class="s2">Status</span><span class="s1">:** </span><span class="s2">Implemented ✅</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<html>
+<head>
+<title>CHANGELOG.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CHANGELOG.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">AIVALA Platform - Major Updates</span>
+
+<span class="s0">## </span><span class="s2">Version 2.0 - January 2026</span>
+
+<span class="s0">### </span><span class="s2">🎯 Major Changes Summary</span>
+
+<span class="s2">This update implements three critical modifications to improve user experience, privacy, and fraud detection capabilities</span><span class="s1">:</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Removed Health Insurance</span><span class="s1">** </span><span class="s2">- Focus on Auto &amp; Property only</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Removed Auto-blur Face Feature</span><span class="s1">** </span><span class="s2">- Face visibility required for authentication</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Added Offline Mode</span><span class="s1">** </span><span class="s2">- Claims can be recorded without internet connection</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📋 Detailed Changes</span>
+
+<span class="s0">### </span><span class="s2">1. Health Insurance Removal</span>
+
+<span class="s1">**</span><span class="s2">Reason</span><span class="s1">:** </span><span class="s2">Scope reduction to focus on automotive/property insurance where video validation is most effective.</span>
+
+<span class="s1">**</span><span class="s2">Changes Made</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">✅ Removed </span><span class="s1">&quot;</span><span class="s2">Health Insurance</span><span class="s1">&quot; </span><span class="s2">option from claim type selection </span><span class="s1">(</span><span class="s2">`NewClaimType.tsx`</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">✅ Updated `Claim` interface to only accept `</span><span class="s1">'</span><span class="s2">auto' | </span><span class="s1">'</span><span class="s2">property'` types</span>
+<span class="s0">- </span><span class="s2">✅ Updated mock data to remove health insurance claims</span>
+<span class="s0">- </span><span class="s2">✅ Updated Profile page to show only Auto and Property policies</span>
+<span class="s0">- </span><span class="s2">✅ Updated web dashboard filters to remove health option</span>
+<span class="s0">- </span><span class="s2">✅ All references to health insurance removed from codebase</span>
+
+<span class="s1">**</span><span class="s2">Affected Files</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/NewClaimType.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/Profile.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/web/ClaimsManagement.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/data/mockData.ts`</span>
+
+<span class="s0">---</span>
+
+<span class="s0">### </span><span class="s2">2. Face Visibility Required </span><span class="s1">(</span><span class="s2">Auto-blur Removed</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">Reason</span><span class="s1">:** </span><span class="s2">Face visibility is critical for authentication and fraud prevention. Privacy is maintained through other measures.</span>
+
+<span class="s1">**</span><span class="s2">Changes Made</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">✅ Removed </span><span class="s1">&quot;</span><span class="s2">Auto-blur Face in Videos</span><span class="s1">&quot; </span><span class="s2">toggle from Settings</span>
+<span class="s0">- </span><span class="s2">✅ Added clear privacy notice explaining face visibility requirement</span>
+<span class="s0">- </span><span class="s2">✅ Updated registration flow with mandatory privacy consent</span>
+<span class="s0">- </span><span class="s2">✅ Added face visibility requirement to video recording instructions</span>
+<span class="s0">- </span><span class="s2">✅ Emphasized face-first recording in UI guidance</span>
+
+<span class="s1">**</span><span class="s2">Privacy Measures Implemented</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">End-to-end encryption for all video data</span>
+<span class="s0">- </span><span class="s2">Automatic deletion of raw videos after processing </span><span class="s1">(</span><span class="s2">within 24 hours</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Only extracted frames retained for claim records</span>
+<span class="s0">- </span><span class="s2">User consent required during registration</span>
+<span class="s0">- </span><span class="s2">Clear privacy policy disclosure</span>
+
+<span class="s1">**</span><span class="s2">Affected Files</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/Settings.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/Register.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/VideoRecording.tsx`</span>
+
+<span class="s0">---</span>
+
+<span class="s0">### </span><span class="s2">3. Offline Mode Implementation</span>
+
+<span class="s1">**</span><span class="s2">Reason</span><span class="s1">:** </span><span class="s2">Many users in India have intermittent internet connectivity. This feature ensures uninterrupted service.</span>
+
+<span class="s1">**</span><span class="s2">Features Implemented</span><span class="s1">:**</span>
+
+<span class="s0">#### </span><span class="s2">A. Core Offline Utilities</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">OfflineStorage Manager</span><span class="s1">** (</span><span class="s2">`/src/app/utils/offlineStorage.ts`</span><span class="s1">)</span>
+  <span class="s0">- </span><span class="s2">Local storage for up to 10 pending claims</span>
+  <span class="s0">- </span><span class="s2">Maximum 100MB storage limit</span>
+  <span class="s0">- </span><span class="s2">Automatic size tracking and management</span>
+  <span class="s0">- </span><span class="s2">Encrypted local storage</span>
+  <span class="s0">- </span><span class="s2">Auto-cleanup after successful upload</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Network Status Monitor</span><span class="s1">** (</span><span class="s2">`/src/app/utils/networkStatus.ts`</span><span class="s1">)</span>
+  <span class="s0">- </span><span class="s2">Real-time online/offline detection</span>
+  <span class="s0">- </span><span class="s2">Connection quality assessment</span>
+  <span class="s0">- </span><span class="s2">Upload time estimation based on connection speed</span>
+  <span class="s0">- </span><span class="s2">React hooks for easy integration</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Sync Manager</span><span class="s1">** (</span><span class="s2">`/src/app/utils/syncManager.ts`</span><span class="s1">)</span>
+  <span class="s0">- </span><span class="s2">Auto-sync every 30 seconds when online</span>
+  <span class="s0">- </span><span class="s2">Smart retry logic for failed uploads</span>
+  <span class="s0">- </span><span class="s2">Queue management for pending claims</span>
+  <span class="s0">- </span><span class="s2">Background sync capability</span>
+
+<span class="s0">#### </span><span class="s2">B. UI Updates</span>
+
+<span class="s1">**</span><span class="s2">Mobile App Updates</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Network status badges on all claim-related screens</span>
+<span class="s0">- </span><span class="s2">Offline sync status card on Dashboard</span>
+<span class="s0">- </span><span class="s2">Offline mode indicators during video recording</span>
+<span class="s0">- </span><span class="s2">Storage usage display in Settings</span>
+<span class="s0">- </span><span class="s2">Manual sync controls</span>
+<span class="s0">- </span><span class="s2">Pending upload counters</span>
+
+<span class="s1">**</span><span class="s2">User Flow</span><span class="s1">:**</span>
+<span class="s0">1. </span><span class="s2">User opens app → automatic connectivity check</span>
+<span class="s0">2. </span><span class="s2">If offline → </span><span class="s1">&quot;</span><span class="s2">Offline Mode Available</span><span class="s1">&quot; </span><span class="s2">message shown</span>
+<span class="s0">3. </span><span class="s2">User records video and fills forms normally</span>
+<span class="s0">4. </span><span class="s2">App saves claim locally with </span><span class="s1">&quot;</span><span class="s2">Saved for upload</span><span class="s1">&quot; </span><span class="s2">confirmation</span>
+<span class="s0">5. </span><span class="s2">When back online → automatic sync starts</span>
+<span class="s0">6. </span><span class="s2">User receives notification when upload completes</span>
+
+<span class="s1">**</span><span class="s2">Affected Files</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/Dashboard.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/NewClaimType.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/VideoRecording.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/pages/mobile/Settings.tsx`</span>
+<span class="s0">- </span><span class="s2">`/src/app/components/OfflineSync.tsx` </span><span class="s1">(</span><span class="s2">new</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">`/src/app/components/Root.tsx` </span><span class="s1">(</span><span class="s2">added Toaster</span><span class="s1">)</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🔧 Technical Implementation</span>
+
+<span class="s0">### </span><span class="s2">New Files Created</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">`/src/app/utils/offlineStorage.ts`</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">`OfflineStorageManager` class</span>
+   <span class="s0">- </span><span class="s2">CRUD operations for offline claims</span>
+   <span class="s0">- </span><span class="s2">Storage limit enforcement</span>
+   <span class="s0">- </span><span class="s2">Size calculation utilities</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">`/src/app/utils/networkStatus.ts`</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">`useNetworkStatus</span><span class="s1">()</span><span class="s2">` React hook</span>
+   <span class="s0">- </span><span class="s2">Connection quality helpers</span>
+   <span class="s0">- </span><span class="s2">Upload time estimation</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">`/src/app/utils/syncManager.ts`</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">`SyncManager` class</span>
+   <span class="s0">- </span><span class="s2">Auto-sync functionality</span>
+   <span class="s0">- </span><span class="s2">Retry logic for failed uploads</span>
+   <span class="s0">- </span><span class="s2">Queue management</span>
+
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">`/src/app/components/OfflineSync.tsx`</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Visual sync status component</span>
+   <span class="s0">- </span><span class="s2">Storage usage display</span>
+   <span class="s0">- </span><span class="s2">Manual sync controls</span>
+   <span class="s0">- </span><span class="s2">Pending/failed upload indicators</span>
+
+<span class="s0">### </span><span class="s2">Dependencies Used</span>
+
+<span class="s2">All existing dependencies - no new packages required</span><span class="s1">:</span>
+<span class="s0">- </span><span class="s2">`sonner` - Toast notifications </span><span class="s1">(</span><span class="s2">already installed</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">`lucide-react` - Icons </span><span class="s1">(</span><span class="s2">already installed</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">LocalStorage API - Browser native</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🎨 UI/UX Improvements</span>
+
+<span class="s0">### </span><span class="s2">Visual Indicators</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Network Status Badges</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Green </span><span class="s1">&quot;</span><span class="s2">Online</span><span class="s1">&quot; </span><span class="s2">badge with WiFi icon</span>
+   <span class="s0">- </span><span class="s2">Gray </span><span class="s1">&quot;</span><span class="s2">Offline</span><span class="s1">&quot; </span><span class="s2">badge with WiFi-off icon</span>
+   <span class="s0">- </span><span class="s2">Visible on key screens </span><span class="s1">(</span><span class="s2">New Claim, Video Recording</span><span class="s1">)</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Offline Sync Card</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Shows on Dashboard when offline claims exist</span>
+   <span class="s0">- </span><span class="s2">Real-time storage usage progress bar</span>
+   <span class="s0">- </span><span class="s2">Pending/failed upload counts</span>
+   <span class="s0">- </span><span class="s2">Manual sync buttons</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Privacy Notices</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Clear face visibility requirement in registration</span>
+   <span class="s0">- </span><span class="s2">Privacy policy bullets with icons</span>
+   <span class="s0">- </span><span class="s2">Mandatory consent checkboxes</span>
+   <span class="s0">- </span><span class="s2">Blue info boxes in Settings</span>
+
+<span class="s0">### </span><span class="s2">Responsive Messages</span>
+
+<span class="s0">- </span><span class="s2">Context-aware messages based on network status</span>
+<span class="s0">- </span><span class="s2">Toast notifications for sync events</span>
+<span class="s0">- </span><span class="s2">Auto-disappearing success/error messages</span>
+<span class="s0">- </span><span class="s2">Confirmation dialogs for destructive actions</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📊 Benefits</span>
+
+<span class="s0">### </span><span class="s2">1. Better User Experience</span>
+<span class="s0">- </span><span class="s2">✅ Works in areas with poor connectivity</span>
+<span class="s0">- </span><span class="s2">✅ No interruption in claim process</span>
+<span class="s0">- </span><span class="s2">✅ Faster initial submission </span><span class="s1">(</span><span class="s2">no upload wait</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">✅ Reduced user frustration</span>
+
+<span class="s0">### </span><span class="s2">2. Enhanced Fraud Prevention</span>
+<span class="s0">- </span><span class="s2">✅ Clear face visibility improves authentication</span>
+<span class="s0">- </span><span class="s2">✅ Physical presence verification more reliable</span>
+<span class="s0">- </span><span class="s2">✅ Better deepfake detection without blurring</span>
+<span class="s0">- </span><span class="s2">✅ Stronger identity validation</span>
+
+<span class="s0">### </span><span class="s2">3. Focused Development</span>
+<span class="s0">- </span><span class="s2">✅ Reduced scope complexity</span>
+<span class="s0">- </span><span class="s2">✅ Better specialized models for auto/property</span>
+<span class="s0">- </span><span class="s2">✅ Faster time to market</span>
+<span class="s0">- </span><span class="s2">✅ Easier maintenance</span>
+
+<span class="s0">### </span><span class="s2">4. Competitive Advantage</span>
+<span class="s0">- </span><span class="s2">✅ Only insurance app with reliable offline mode in India</span>
+<span class="s0">- </span><span class="s2">✅ Better suited for Indian connectivity conditions</span>
+<span class="s0">- </span><span class="s2">✅ More accurate fraud detection</span>
+<span class="s0">- </span><span class="s2">✅ Improved user retention</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🔒 Privacy &amp; Compliance</span>
+
+<span class="s0">### </span><span class="s2">Updated Approach</span>
+
+<span class="s1">**</span><span class="s2">User Consent</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">✅ Clear explanation of face visibility requirement</span>
+<span class="s0">- </span><span class="s2">✅ Detailed privacy policy during registration</span>
+<span class="s0">- </span><span class="s2">✅ Mandatory consent checkboxes</span>
+<span class="s0">- </span><span class="s2">✅ Right to data deletion</span>
+
+<span class="s1">**</span><span class="s2">Data Protection</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">✅ End-to-end encryption</span>
+<span class="s0">- </span><span class="s2">✅ Automatic video deletion </span><span class="s1">(</span><span class="s2">24 hours</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">✅ Minimal data retention </span><span class="s1">(</span><span class="s2">frames only</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">✅ Secure local storage</span>
+
+<span class="s1">**</span><span class="s2">Regulatory Compliance</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">✅ IRDAI guidelines for insurance data</span>
+<span class="s0">- </span><span class="s2">✅ Indian Data Protection Act requirements</span>
+<span class="s0">- </span><span class="s2">✅ GDPR principles for data handling</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🧪 Testing Recommendations</span>
+
+<span class="s0">### </span><span class="s2">Manual Testing</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Offline Mode</span><span class="s1">:**</span>
+   <span class="s0">- </span><span class="s2">Toggle device airplane mode</span>
+   <span class="s0">- </span><span class="s2">Record claim offline</span>
+   <span class="s0">- </span><span class="s2">Verify local storage</span>
+   <span class="s0">- </span><span class="s2">Re-enable network</span>
+   <span class="s0">- </span><span class="s2">Verify auto-sync</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Face Visibility</span><span class="s1">:**</span>
+   <span class="s0">- </span><span class="s2">Check registration consent flow</span>
+   <span class="s0">- </span><span class="s2">Verify video recording guidance</span>
+   <span class="s0">- </span><span class="s2">Test settings privacy notices</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Claim Types</span><span class="s1">:**</span>
+   <span class="s0">- </span><span class="s2">Verify only Auto and Property options appear</span>
+   <span class="s0">- </span><span class="s2">Check web dashboard filters</span>
+   <span class="s0">- </span><span class="s2">Test claim data consistency</span>
+
+<span class="s0">### </span><span class="s2">Storage Testing</span>
+
+<span class="s0">1. </span><span class="s2">Test storage limits </span><span class="s1">(</span><span class="s2">10 claims, 100MB</span><span class="s1">)</span>
+<span class="s0">2. </span><span class="s2">Test storage cleanup after sync</span>
+<span class="s0">3. </span><span class="s2">Test manual clear data function</span>
+<span class="s0">4. </span><span class="s2">Verify storage info display accuracy</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📱 User-Facing Changes</span>
+
+<span class="s0">### </span><span class="s2">Mobile App</span>
+
+<span class="s1">**</span><span class="s2">New Features</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Offline claim recording</span>
+<span class="s0">- </span><span class="s2">Auto-sync when online</span>
+<span class="s0">- </span><span class="s2">Storage management</span>
+<span class="s0">- </span><span class="s2">Network status indicators</span>
+<span class="s0">- </span><span class="s2">Enhanced privacy controls</span>
+
+<span class="s1">**</span><span class="s2">Removed Features</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Health Insurance option</span>
+<span class="s0">- </span><span class="s2">Auto-blur face toggle</span>
+
+<span class="s1">**</span><span class="s2">Updated Features</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Registration flow </span><span class="s1">(</span><span class="s2">added consent</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Settings page </span><span class="s1">(</span><span class="s2">offline controls</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Video recording </span><span class="s1">(</span><span class="s2">face visibility emphasis</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Web Dashboard</span>
+
+<span class="s1">**</span><span class="s2">Updated Features</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Claim type filters </span><span class="s1">(</span><span class="s2">removed health</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Claims table </span><span class="s1">(</span><span class="s2">auto/property only</span><span class="s1">)</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🚀 Future Enhancements</span>
+
+<span class="s2">Potential improvements for next versions</span><span class="s1">:</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Advanced Offline</span><span class="s1">:**</span>
+   <span class="s0">- </span><span class="s2">IndexedDB for larger storage</span>
+   <span class="s0">- </span><span class="s2">Service Workers for true background sync</span>
+   <span class="s0">- </span><span class="s2">Offline AI processing </span><span class="s1">(</span><span class="s2">basic checks</span><span class="s1">)</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Privacy</span><span class="s1">:**</span>
+   <span class="s0">- </span><span class="s2">Selective document blurring option</span>
+   <span class="s0">- </span><span class="s2">Enhanced encryption methods</span>
+   <span class="s0">- </span><span class="s2">Blockchain-based data verification</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Performance</span><span class="s1">:**</span>
+   <span class="s0">- </span><span class="s2">Video compression before storage</span>
+   <span class="s0">- </span><span class="s2">Chunked uploads for large files</span>
+   <span class="s0">- </span><span class="s2">Progressive upload with resume capability</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">📝 Notes for Developers</span>
+
+<span class="s0">### </span><span class="s2">Local Storage Keys</span>
+
+<span class="s0">- </span><span class="s2">`aivala_offline_claims` - Stores offline claim data</span>
+<span class="s0">- </span><span class="s2">`aivala_sync_queue` - Manages upload queue</span>
+
+<span class="s0">### </span><span class="s2">Storage Limits</span>
+
+<span class="s0">- </span><span class="s2">Max Claims</span><span class="s1">: </span><span class="s2">10 per device</span>
+<span class="s0">- </span><span class="s2">Max Storage</span><span class="s1">: </span><span class="s2">100MB total</span>
+<span class="s0">- </span><span class="s2">Auto-cleanup</span><span class="s1">: </span><span class="s2">After successful upload</span>
+
+<span class="s0">### </span><span class="s2">Network Detection</span>
+
+<span class="s0">- </span><span class="s2">Uses `navigator.onLine` for status</span>
+<span class="s0">- </span><span class="s2">Monitors connection change events</span>
+<span class="s0">- </span><span class="s2">Assesses connection quality when available</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">✅ Checklist</span>
+
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Health insurance removed from all components</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Face blur feature removed</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Offline storage manager implemented</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Network status monitoring implemented</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Sync manager implemented</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">UI components updated</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Privacy consent flows updated</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Mock data updated</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Documentation created</span>
+<span class="s0">- </span><span class="s1">[x] </span><span class="s2">Toast notifications integrated</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">🤝 Support</span>
+
+<span class="s2">For questions or issues related to these changes</span><span class="s1">:</span>
+<span class="s0">1. </span><span class="s2">Check this changelog first</span>
+<span class="s0">2. </span><span class="s2">Review inline code comments</span>
+<span class="s0">3. </span><span class="s2">Test in your local environment</span>
+<span class="s0">4. </span><span class="s2">Refer to utility function JSDoc comments</span>
+
+<span class="s0">---</span>
+
+<span class="s1">**</span><span class="s2">Last Updated</span><span class="s1">:** </span><span class="s2">January 24, 2026  </span>
+<span class="s1">**</span><span class="s2">Version</span><span class="s1">:** </span><span class="s2">2.0.0  </span>
+<span class="s1">**</span><span class="s2">Status</span><span class="s1">:** </span><span class="s2">Completed ✅</span>
+</pre>
+</body>
+</html>

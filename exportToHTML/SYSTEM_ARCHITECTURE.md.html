@@ -1,0 +1,690 @@
+<html>
+<head>
+<title>SYSTEM_ARCHITECTURE.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #c77dbb; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SYSTEM_ARCHITECTURE.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">AIVALA Insurance Claim Platform - System Architecture</span>
+
+<span class="s0">## </span><span class="s2">Table of Contents</span>
+<span class="s0">1. </span><span class="s1">[</span><span class="s2">Overview</span><span class="s1">](</span><span class="s2">#overview</span><span class="s1">)</span>
+<span class="s0">2. </span><span class="s1">[</span><span class="s2">Technology Stack</span><span class="s1">](</span><span class="s2">#technology-stack</span><span class="s1">)</span>
+<span class="s0">3. </span><span class="s1">[</span><span class="s2">Application Architecture</span><span class="s1">](</span><span class="s2">#application-architecture</span><span class="s1">)</span>
+<span class="s0">4. </span><span class="s1">[</span><span class="s2">Feature Modules</span><span class="s1">](</span><span class="s2">#feature-modules</span><span class="s1">)</span>
+<span class="s0">5. </span><span class="s1">[</span><span class="s2">Data Architecture</span><span class="s1">](</span><span class="s2">#data-architecture</span><span class="s1">)</span>
+<span class="s0">6. </span><span class="s1">[</span><span class="s2">Offline-First Architecture</span><span class="s1">](</span><span class="s2">#offline-first-architecture</span><span class="s1">)</span>
+<span class="s0">7. </span><span class="s1">[</span><span class="s2">Security &amp; Privacy</span><span class="s1">](</span><span class="s2">#security--privacy</span><span class="s1">)</span>
+<span class="s0">8. </span><span class="s1">[</span><span class="s2">Component Architecture</span><span class="s1">](</span><span class="s2">#component-architecture</span><span class="s1">)</span>
+<span class="s0">9. </span><span class="s1">[</span><span class="s2">Routing Architecture</span><span class="s1">](</span><span class="s2">#routing-architecture</span><span class="s1">)</span>
+<span class="s0">10. </span><span class="s1">[</span><span class="s2">Future Scalability</span><span class="s1">](</span><span class="s2">#future-scalability</span><span class="s1">)</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Overview</span>
+
+<span class="s2">AIVALA is a comprehensive insurance claim platform that leverages AI-powered video analysis for fraud detection and automated damage assessment. The platform consists of two primary interfaces</span><span class="s1">:</span>
+
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Mobile Application</span><span class="s1">**: </span><span class="s2">Customer-facing claim submission and tracking</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Web Dashboard</span><span class="s1">**: </span><span class="s2">Insurer-facing claim management and fraud analytics</span>
+
+<span class="s0">### </span><span class="s2">Core Capabilities</span>
+<span class="s0">- </span><span class="s2">AI-powered video-based claim validation</span>
+<span class="s0">- </span><span class="s2">Real-time fraud detection with multi-layer analysis</span>
+<span class="s0">- </span><span class="s2">Automated damage assessment</span>
+<span class="s0">- </span><span class="s2">Offline-first architecture with automatic sync</span>
+<span class="s0">- </span><span class="s2">Comprehensive claim lifecycle management</span>
+<span class="s0">- </span><span class="s2">Team performance analytics</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Technology Stack</span>
+
+<span class="s0">### </span><span class="s2">Frontend Framework</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">React 18.3.1</span><span class="s1">**: </span><span class="s2">Component-based UI library</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">TypeScript</span><span class="s1">**: </span><span class="s2">Type-safe development</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Vite 6.3.5</span><span class="s1">**: </span><span class="s2">Build tool and dev server</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">React Router 7.13.0</span><span class="s1">**: </span><span class="s2">Client-side routing</span>
+
+<span class="s0">### </span><span class="s2">UI &amp; Styling</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Tailwind CSS 4.1.12</span><span class="s1">**: </span><span class="s2">Utility-first CSS framework</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Radix UI</span><span class="s1">**: </span><span class="s2">Accessible component primitives </span><span class="s1">(</span><span class="s2">40+ components</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Material UI 7.3.5</span><span class="s1">**: </span><span class="s2">Comprehensive component library</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Lucide React</span><span class="s1">**: </span><span class="s2">Icon library</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Motion 12.23.24</span><span class="s1">**: </span><span class="s2">Animation library </span><span class="s1">(</span><span class="s2">formerly Framer Motion</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Data Visualization</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Recharts 2.15.2</span><span class="s1">**: </span><span class="s2">Chart and graph library for analytics dashboards</span>
+
+<span class="s0">### </span><span class="s2">Form Management</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">React Hook Form 7.55.0</span><span class="s1">**: </span><span class="s2">Performant form validation and handling</span>
+
+<span class="s0">### </span><span class="s2">State Management</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">React Context</span><span class="s1">**: </span><span class="s2">Local state management</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">LocalStorage API</span><span class="s1">**: </span><span class="s2">Offline data persistence</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Custom Hooks</span><span class="s1">**: </span><span class="s2">Network status, offline storage, sync management</span>
+
+<span class="s0">### </span><span class="s2">Development Tools</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">@vitejs/plugin-react</span><span class="s1">**: </span><span class="s2">React plugin for Vite</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">@tailwindcss/vite</span><span class="s1">**: </span><span class="s2">Tailwind integration</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Application Architecture</span>
+
+<span class="s0">### </span><span class="s2">High-Level Architecture</span>
+
+<span class="s0">```</span>
+<span class="s3">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="s3">│                     AIVALA Platform                         │</span>
+<span class="s3">├─────────────────────────────────────────────────────────────┤</span>
+<span class="s3">│                                                             │</span>
+<span class="s3">│  ┌─────────────────────┐      ┌─────────────────────┐     │</span>
+<span class="s3">│  │   Mobile App        │      │   Web Dashboard     │     │</span>
+<span class="s3">│  │   (Claimants)       │      │   (Insurers)        │     │</span>
+<span class="s3">│  │                     │      │                     │     │</span>
+<span class="s3">│  │ • Claim Submission  │      │ • Claims Review     │     │</span>
+<span class="s3">│  │ • Video Recording   │      │ • Fraud Analytics   │     │</span>
+<span class="s3">│  │ • Status Tracking   │      │ • Team Management   │     │</span>
+<span class="s3">│  │ • Offline Mode      │      │ • Settlement Mgmt   │     │</span>
+<span class="s3">│  └─────────────────────┘      └─────────────────────┘     │</span>
+<span class="s3">│           │                            │                    │</span>
+<span class="s3">│           └────────────┬───────────────┘                    │</span>
+<span class="s3">│                        │                                    │</span>
+<span class="s3">│              ┌─────────▼──────────┐                        │</span>
+<span class="s3">│              │   Shared Services   │                        │</span>
+<span class="s3">│              ├─────────────────────┤                        │</span>
+<span class="s3">│              │ • Routing Engine    │                        │</span>
+<span class="s3">│              │ • UI Components     │                        │</span>
+<span class="s3">│              │ • Utilities         │                        │</span>
+<span class="s3">│              │ • Data Models       │                        │</span>
+<span class="s3">│              └─────────────────────┘                        │</span>
+<span class="s3">│                        │                                    │</span>
+<span class="s3">│              ┌─────────▼──────────┐                        │</span>
+<span class="s3">│              │  Offline Layer      │                        │</span>
+<span class="s3">│              ├─────────────────────┤                        │</span>
+<span class="s3">│              │ • LocalStorage      │                        │</span>
+<span class="s3">│              │ • Sync Manager      │                        │</span>
+<span class="s3">│              │ • Network Monitor   │                        │</span>
+<span class="s3">│              └─────────────────────┘                        │</span>
+<span class="s3">│                        │                                    │</span>
+<span class="s3">│              ┌─────────▼──────────┐                        │</span>
+<span class="s3">│              │   Backend API       │                        │</span>
+<span class="s3">│              │  (Future/Mock)      │                        │</span>
+<span class="s3">│              ├─────────────────────┤                        │</span>
+<span class="s3">│              │ • Claim Processing  │                        │</span>
+<span class="s3">│              │ • AI Analysis       │                        │</span>
+<span class="s3">│              │ • Video Storage     │                        │</span>
+<span class="s3">│              │ • User Auth         │                        │</span>
+<span class="s3">│              └─────────────────────┘                        │</span>
+<span class="s3">└─────────────────────────────────────────────────────────────┘</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Architecture Patterns</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Component-Based Architecture</span><span class="s1">**: </span><span class="s2">Modular, reusable React components</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Route-Based Code Splitting</span><span class="s1">**: </span><span class="s2">Separate mobile and web routes</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Offline-First Design</span><span class="s1">**: </span><span class="s2">Local storage with background sync</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Responsive Design</span><span class="s1">**: </span><span class="s2">Mobile-first with adaptive layouts</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Design System</span><span class="s1">**: </span><span class="s2">Consistent color palette, typography, and components</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Feature Modules</span>
+
+<span class="s0">### </span><span class="s2">Mobile Application </span><span class="s1">(</span><span class="s2">15+ Screens</span><span class="s1">)</span>
+
+<span class="s0">#### </span><span class="s2">1. Authentication Module</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Welcome Screen</span><span class="s1">**: </span><span class="s2">Landing page with branding</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Login Screen</span><span class="s1">**: </span><span class="s2">Email/phone authentication with biometric option</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Register Screen</span><span class="s1">**: </span><span class="s2">New user onboarding with KYC</span>
+
+<span class="s0">#### </span><span class="s2">2. Claim Submission Module</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Dashboard</span><span class="s1">**: </span><span class="s2">Overview of active claims and quick actions</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">New Claim Type</span><span class="s1">**: </span><span class="s2">Selection between Auto and Property insurance</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Video Recording</span><span class="s1">**: </span>
+  <span class="s0">- </span><span class="s2">Live camera feed with recording controls</span>
+  <span class="s0">- </span><span class="s2">Real-time guidance overlay</span>
+  <span class="s0">- </span><span class="s2">Face visibility verification </span><span class="s1">(</span><span class="s2">no blur</span><span class="s1">)</span>
+  <span class="s0">- </span><span class="s2">Damage area highlighting</span>
+  <span class="s0">- </span><span class="s2">60-second maximum duration</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Claim Details</span><span class="s1">**: </span><span class="s2">Additional information entry</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Claim Submission</span><span class="s1">**: </span><span class="s2">Final review and submit</span>
+
+<span class="s0">#### </span><span class="s2">3. Processing &amp; Results Module</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Processing Screen</span><span class="s1">**: </span>
+  <span class="s0">- </span><span class="s2">Real-time AI analysis progress</span>
+  <span class="s0">- </span><span class="s2">Multi-stage processing indicators</span>
+  <span class="s0">- </span><span class="s2">Estimated completion time</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Results Screen</span><span class="s1">**: </span>
+  <span class="s0">- </span><span class="s2">Fraud score display</span>
+  <span class="s0">- </span><span class="s2">Approval/rejection status</span>
+  <span class="s0">- </span><span class="s2">AI confidence metrics</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Damage Details</span><span class="s1">**: </span>
+  <span class="s0">- </span><span class="s2">Detected damage areas</span>
+  <span class="s0">- </span><span class="s2">Cost estimation breakdown</span>
+  <span class="s0">- </span><span class="s2">Before/after imagery</span>
+
+<span class="s0">#### </span><span class="s2">4. Settlement Module</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Settlement Screen</span><span class="s1">**: </span>
+  <span class="s0">- </span><span class="s2">Payment details</span>
+  <span class="s0">- </span><span class="s2">Settlement timeline</span>
+  <span class="s0">- </span><span class="s2">Document uploads</span>
+  <span class="s0">- </span><span class="s2">Bank account verification</span>
+
+<span class="s0">#### </span><span class="s2">5. History &amp; Profile Module</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Claims History</span><span class="s1">**: </span><span class="s2">Chronological claim listing with filters</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Profile</span><span class="s1">**: </span><span class="s2">User information and documents</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Settings</span><span class="s1">**: </span>
+  <span class="s0">- </span><span class="s2">Notification preferences</span>
+  <span class="s0">- </span><span class="s2">Privacy controls</span>
+  <span class="s0">- </span><span class="s2">Offline mode settings</span>
+  <span class="s0">- </span><span class="s2">Storage management</span>
+
+<span class="s0">### </span><span class="s2">Web Dashboard </span><span class="s1">(</span><span class="s2">6+ Screens</span><span class="s1">)</span>
+
+<span class="s0">#### </span><span class="s2">1. Claims Management</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Main Dashboard</span><span class="s1">**: </span>
+  <span class="s0">- </span><span class="s2">Real-time metrics </span><span class="s1">(</span><span class="s2">total claims, approval rate, fraud detection</span><span class="s1">)</span>
+  <span class="s0">- </span><span class="s2">Trending analytics charts</span>
+  <span class="s0">- </span><span class="s2">Quick action widgets</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Claims Management</span><span class="s1">**: </span>
+  <span class="s0">- </span><span class="s2">Searchable/filterable claim table</span>
+  <span class="s0">- </span><span class="s2">Bulk actions</span>
+  <span class="s0">- </span><span class="s2">Status management</span>
+  <span class="s0">- </span><span class="s2">Claim detail modal with video playback</span>
+
+<span class="s0">#### </span><span class="s2">2. Fraud Analytics</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Fraud Analytics Dashboard</span><span class="s1">**:</span>
+  <span class="s0">- </span><span class="s2">Multi-layer fraud detection visualization</span>
+  <span class="s0">- </span><span class="s2">Pattern recognition charts</span>
+  <span class="s0">- </span><span class="s2">Geographic fraud heatmaps</span>
+  <span class="s0">- </span><span class="s2">Temporal fraud trends</span>
+  <span class="s0">- </span><span class="s2">Individual fraud factor breakdown</span>
+
+<span class="s0">#### </span><span class="s2">3. Settlement Operations</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Settlement Management</span><span class="s1">**:</span>
+  <span class="s0">- </span><span class="s2">Payment processing queue</span>
+  <span class="s0">- </span><span class="s2">Settlement approval workflow</span>
+  <span class="s0">- </span><span class="s2">Payment tracking</span>
+  <span class="s0">- </span><span class="s2">Dispute management</span>
+
+<span class="s0">#### </span><span class="s2">4. Team Operations</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Team Management</span><span class="s1">**:</span>
+  <span class="s0">- </span><span class="s2">Adjuster performance metrics</span>
+  <span class="s0">- </span><span class="s2">Workload distribution</span>
+  <span class="s0">- </span><span class="s2">Team member roles and permissions</span>
+  <span class="s0">- </span><span class="s2">Activity logs</span>
+
+<span class="s0">#### </span><span class="s2">5. System Configuration</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">System Settings</span><span class="s1">**:</span>
+  <span class="s0">- </span><span class="s2">AI model configuration</span>
+  <span class="s0">- </span><span class="s2">Fraud threshold tuning</span>
+  <span class="s0">- </span><span class="s2">Integration settings</span>
+  <span class="s0">- </span><span class="s2">Notification templates</span>
+  <span class="s0">- </span><span class="s2">Audit logs</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Data Architecture</span>
+
+<span class="s0">### </span><span class="s2">Data Models</span>
+
+<span class="s0">#### </span><span class="s2">Claim Data Structure</span>
+<span class="s0">```</span><span class="s4">typescript</span>
+<span class="s3">interface Claim {</span>
+  <span class="s3">id: string;                    // Unique claim identifier</span>
+  <span class="s3">customerId: string;            // Customer reference</span>
+  <span class="s3">customerName: string;          // Display name</span>
+  <span class="s3">type: 'auto' | 'property';    // Claim category</span>
+  <span class="s3">status: 'pending' | 'approved' | 'rejected' | 'flagged';</span>
+  <span class="s3">fraudScore: number;            // 0-100 fraud probability</span>
+  <span class="s3">damageAssessment: string;      // AI-generated summary</span>
+  <span class="s3">estimatedCost: number;         // Repair cost estimate</span>
+  <span class="s3">submittedAt: string;           // ISO timestamp</span>
+  <span class="s3">processedAt?: string;          // Processing completion time</span>
+  <span class="s3">vehicleInfo?: string;          // Auto-specific data</span>
+  <span class="s3">propertyInfo?: string;         // Property-specific data</span>
+  <span class="s3">location?: string;             // Incident location</span>
+  <span class="s3">description?: string;          // User description</span>
+<span class="s3">}</span>
+<span class="s0">```</span>
+
+<span class="s0">#### </span><span class="s2">Offline Claim Structure</span>
+<span class="s0">```</span><span class="s4">typescript</span>
+<span class="s3">interface OfflineClaim {</span>
+  <span class="s3">id: string;</span>
+  <span class="s3">type: 'auto' | 'property';</span>
+  <span class="s3">status: 'draft' | 'pending_upload';</span>
+  <span class="s3">videoBlob?: string;            // Base64 encoded video</span>
+  <span class="s3">claimData: {</span>
+    <span class="s3">description?: string;</span>
+    <span class="s3">location?: string;</span>
+    <span class="s3">vehicleInfo?: string;</span>
+    <span class="s3">propertyInfo?: string;</span>
+  <span class="s3">};</span>
+  <span class="s3">createdAt: string;</span>
+  <span class="s3">lastModified: string;</span>
+  <span class="s3">size: number;                  // Storage size in bytes</span>
+<span class="s3">}</span>
+<span class="s0">```</span>
+
+<span class="s0">#### </span><span class="s2">Sync Queue Structure</span>
+<span class="s0">```</span><span class="s4">typescript</span>
+<span class="s3">interface SyncQueue {</span>
+  <span class="s3">pendingUploads: string[];      // Claim IDs awaiting upload</span>
+  <span class="s3">failedUploads: string[];       // Failed upload claim IDs</span>
+  <span class="s3">lastSyncAttempt?: string;      // Last sync timestamp</span>
+<span class="s3">}</span>
+<span class="s0">```</span>
+
+<span class="s0">#### </span><span class="s2">Fraud Analysis Layers</span>
+<span class="s0">```</span><span class="s4">typescript</span>
+<span class="s3">interface FraudLayer {</span>
+  <span class="s3">name: string;                  // Layer identifier</span>
+  <span class="s3">score: number;                 // 0-100 fraud score</span>
+  <span class="s3">confidence: 'high' | 'medium' | 'low';</span>
+  <span class="s3">details: string;               // Analysis explanation</span>
+<span class="s3">}</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Data Flow</span>
+
+<span class="s0">```</span>
+<span class="s3">┌──────────────┐</span>
+<span class="s3">│   User Input │</span>
+<span class="s3">└──────┬───────┘</span>
+       <span class="s3">│</span>
+       <span class="s3">▼</span>
+<span class="s3">┌──────────────────┐</span>
+<span class="s3">│ Form Validation  │ (React Hook Form)</span>
+<span class="s3">└──────┬───────────┘</span>
+       <span class="s3">│</span>
+       <span class="s3">▼</span>
+<span class="s3">┌──────────────────┐</span>
+<span class="s3">│ Network Check    │ (useNetworkStatus)</span>
+<span class="s3">└──────┬───────────┘</span>
+       <span class="s3">│</span>
+       <span class="s3">├─── Online ───► API Upload ───► Backend Processing</span>
+       <span class="s3">│</span>
+       <span class="s3">└─── Offline ──► LocalStorage ──► Sync Queue</span>
+                              <span class="s3">│</span>
+                              <span class="s3">▼</span>
+                      <span class="s3">┌───────────────┐</span>
+                      <span class="s3">│  Auto-Sync    │ (Every 30s when online)</span>
+                      <span class="s3">└───────┬───────┘</span>
+                              <span class="s3">│</span>
+                              <span class="s3">└───► Retry Upload ───► Backend</span>
+<span class="s0">```</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Offline-First Architecture</span>
+
+<span class="s0">### </span><span class="s2">Key Components</span>
+
+<span class="s0">#### </span><span class="s2">1. Offline Storage Manager </span><span class="s1">(</span><span class="s2">`offlineStorage.ts`</span><span class="s1">)</span>
+<span class="s1">**</span><span class="s2">Responsibilities</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Save claims to LocalStorage</span>
+<span class="s0">- </span><span class="s2">Manage storage quotas </span><span class="s1">(</span><span class="s2">100MB max, 10 claims max</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">CRUD operations for offline claims</span>
+<span class="s0">- </span><span class="s2">Storage usage analytics</span>
+
+<span class="s1">**</span><span class="s2">Storage Keys</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">`aivala_offline_claims`</span><span class="s1">: </span><span class="s2">Array of offline claims</span>
+<span class="s0">- </span><span class="s2">`aivala_sync_queue`</span><span class="s1">: </span><span class="s2">Upload queue metadata</span>
+
+<span class="s1">**</span><span class="s2">Features</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Automatic size validation</span>
+<span class="s0">- </span><span class="s2">Storage limit enforcement</span>
+<span class="s0">- </span><span class="s2">Human-readable size formatting</span>
+<span class="s0">- </span><span class="s2">Claim versioning with timestamps</span>
+
+<span class="s0">#### </span><span class="s2">2. Sync Manager </span><span class="s1">(</span><span class="s2">`syncManager.ts`</span><span class="s1">)</span>
+<span class="s1">**</span><span class="s2">Responsibilities</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Background synchronization </span><span class="s1">(</span><span class="s2">30-second intervals</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Upload retry logic with exponential backoff</span>
+<span class="s0">- </span><span class="s2">Failed upload tracking</span>
+<span class="s0">- </span><span class="s2">Network-aware sync triggering</span>
+
+<span class="s1">**</span><span class="s2">Sync Strategies</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Auto-sync on network restoration</span>
+<span class="s0">- </span><span class="s2">Manual sync trigger</span>
+<span class="s0">- </span><span class="s2">Failed upload retry queue</span>
+<span class="s0">- </span><span class="s2">Batch upload processing</span>
+
+<span class="s1">**</span><span class="s2">Error Handling</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">90% simulated success rate </span><span class="s1">(</span><span class="s2">for demo</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Failed uploads moved to retry queue</span>
+<span class="s0">- </span><span class="s2">User notifications via toast messages</span>
+<span class="s0">- </span><span class="s2">Sync status persistence</span>
+
+<span class="s0">#### </span><span class="s2">3. Network Status Monitor </span><span class="s1">(</span><span class="s2">`networkStatus.ts`</span><span class="s1">)</span>
+<span class="s1">**</span><span class="s2">Responsibilities</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Real-time connectivity detection</span>
+<span class="s0">- </span><span class="s2">Connection quality assessment</span>
+<span class="s0">- </span><span class="s2">Upload time estimation</span>
+<span class="s0">- </span><span class="s2">User-friendly status messages</span>
+
+<span class="s1">**</span><span class="s2">Monitored Metrics</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Online/offline state</span>
+<span class="s0">- </span><span class="s2">Effective connection type </span><span class="s1">(</span><span class="s2">2G, 3G, 4G, WiFi</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Network downlink speed</span>
+<span class="s0">- </span><span class="s2">Round-trip time </span><span class="s1">(</span><span class="s2">RTT</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">Connection Quality Logic</span><span class="s1">:**</span>
+<span class="s0">```</span><span class="s4">typescript</span>
+<span class="s3">Good Connection: 4G, WiFi</span>
+<span class="s3">Moderate: 3G</span>
+<span class="s3">Slow: 2G, slow-2G</span>
+<span class="s3">Offline: No connection</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Offline Mode Features</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Claim Creation Offline</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Full claim form accessible offline</span>
+   <span class="s0">- </span><span class="s2">Video recording and local storage</span>
+   <span class="s0">- </span><span class="s2">Draft saving with auto-save</span>
+   <span class="s0">- </span><span class="s2">Queue for upload when online</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Storage Management</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Visual storage usage indicator</span>
+   <span class="s0">- </span><span class="s2">Automatic cleanup of uploaded claims</span>
+   <span class="s0">- </span><span class="s2">Manual deletion of drafts</span>
+   <span class="s0">- </span><span class="s2">Storage quota warnings</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Sync Indicators</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Network status badge</span>
+   <span class="s0">- </span><span class="s2">Pending upload count</span>
+   <span class="s0">- </span><span class="s2">Sync progress notifications</span>
+   <span class="s0">- </span><span class="s2">Failed upload alerts</span>
+
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">User Experience</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Connection quality messages</span>
+   <span class="s0">- </span><span class="s2">Estimated upload time display</span>
+   <span class="s0">- </span><span class="s2">Offline capability badges</span>
+   <span class="s0">- </span><span class="s2">Seamless online/offline transitions</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Security &amp; Privacy</span>
+
+<span class="s0">### </span><span class="s2">Privacy Features</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Face Visibility Controls</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s1">**</span><span class="s2">No automatic face blurring</span><span class="s1">**: </span><span class="s2">Faces remain visible for fraud prevention</span>
+   <span class="s0">- </span><span class="s1">**</span><span class="s2">Privacy notices</span><span class="s1">**: </span><span class="s2">Clear user communication about video usage</span>
+   <span class="s0">- </span><span class="s1">**</span><span class="s2">Consent management</span><span class="s1">**: </span><span class="s2">Explicit consent before recording</span>
+   <span class="s0">- </span><span class="s1">**</span><span class="s2">Data retention policies</span><span class="s1">**: </span><span class="s2">Configurable retention periods</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Video Recording Privacy</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Recording indicators </span><span class="s1">(</span><span class="s2">red dot, timer</span><span class="s1">)</span>
+   <span class="s0">- </span><span class="s2">Guidance overlays for optimal recording</span>
+   <span class="s0">- </span><span class="s2">Review before submission</span>
+   <span class="s0">- </span><span class="s2">Delete and re-record option</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Data Protection</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Local encryption of stored videos </span><span class="s1">(</span><span class="s2">future enhancement</span><span class="s1">)</span>
+   <span class="s0">- </span><span class="s2">Secure video transmission </span><span class="s1">(</span><span class="s2">HTTPS</span><span class="s1">)</span>
+   <span class="s0">- </span><span class="s2">Access control on web dashboard</span>
+   <span class="s0">- </span><span class="s2">Audit logging for all claim access</span>
+
+<span class="s0">### </span><span class="s2">Security Measures</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Authentication</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Email/phone-based login</span>
+   <span class="s0">- </span><span class="s2">Biometric authentication support </span><span class="s1">(</span><span class="s2">future</span><span class="s1">)</span>
+   <span class="s0">- </span><span class="s2">Session management</span>
+   <span class="s0">- </span><span class="s2">Role-based access control </span><span class="s1">(</span><span class="s2">web dashboard</span><span class="s1">)</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Data Security</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Input validation on all forms</span>
+   <span class="s0">- </span><span class="s2">XSS prevention through React</span>
+   <span class="s0">- </span><span class="s2">CSRF protection </span><span class="s1">(</span><span class="s2">backend integration</span><span class="s1">)</span>
+   <span class="s0">- </span><span class="s2">Secure file upload handling</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">API Security</span><span class="s1">** (</span><span class="s2">Future Backend Integration</span><span class="s1">)</span>
+   <span class="s0">- </span><span class="s2">JWT-based authentication</span>
+   <span class="s0">- </span><span class="s2">Rate limiting</span>
+   <span class="s0">- </span><span class="s2">Request signing</span>
+   <span class="s0">- </span><span class="s2">Encrypted data transmission</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Component Architecture</span>
+
+<span class="s0">### </span><span class="s2">Component Organization</span>
+
+<span class="s0">```</span>
+<span class="s3">src/</span>
+<span class="s3">├── app/</span>
+<span class="s3">│   ├── components/</span>
+<span class="s3">│   │   ├── ui/              # 40+ Reusable UI components</span>
+<span class="s3">│   │   │   ├── button.tsx</span>
+<span class="s3">│   │   │   ├── input.tsx</span>
+<span class="s3">│   │   │   ├── dialog.tsx</span>
+<span class="s3">│   │   │   ├── toast.tsx</span>
+<span class="s3">│   │   │   └── ... (Radix UI wrappers)</span>
+<span class="s3">│   │   ├── web/             # Web-specific components</span>
+<span class="s3">│   │   │   ├── Sidebar.tsx</span>
+<span class="s3">│   │   │   ├── NetworkStatusBadge.tsx</span>
+<span class="s3">│   │   │   └── ...</span>
+<span class="s3">│   │   └── figma/           # Figma import components</span>
+<span class="s3">│   │       └── ImageWithFallback.tsx</span>
+<span class="s3">│   ├── pages/</span>
+<span class="s3">│   │   ├── mobile/          # 15 mobile screens</span>
+<span class="s3">│   │   │   ├── Welcome.tsx</span>
+<span class="s3">│   │   │   ├── Login.tsx</span>
+<span class="s3">│   │   │   ├── VideoRecording.tsx</span>
+<span class="s3">│   │   │   └── ...</span>
+<span class="s3">│   │   └── web/             # 6 web dashboard screens</span>
+<span class="s3">│   │       ├── WebMainDashboard.tsx</span>
+<span class="s3">│   │       ├── ClaimsManagement.tsx</span>
+<span class="s3">│   │       ├── FraudAnalytics.tsx</span>
+<span class="s3">│   │       └── ...</span>
+<span class="s3">│   ├── utils/               # Utility modules</span>
+<span class="s3">│   │   ├── offlineStorage.ts</span>
+<span class="s3">│   │   ├── syncManager.ts</span>
+<span class="s3">│   │   └── networkStatus.ts</span>
+<span class="s3">│   ├── data/                # Mock data and types</span>
+<span class="s3">│   │   └── mockData.ts</span>
+<span class="s3">│   ├── routes.ts            # Route configuration</span>
+<span class="s3">│   └── App.tsx              # Root component</span>
+<span class="s3">└── styles/</span>
+    <span class="s3">├── theme.css            # Design tokens</span>
+    <span class="s3">└── fonts.css            # Font imports</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Component Patterns</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Compound Components</span><span class="s1">**: </span><span class="s2">Complex UI with multiple sub-components</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Controlled Components</span><span class="s1">**: </span><span class="s2">Form inputs managed by React Hook Form</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Higher-Order Components</span><span class="s1">**: </span><span class="s2">Shared logic extraction</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Custom Hooks</span><span class="s1">**: </span><span class="s2">Reusable stateful logic </span><span class="s1">(</span><span class="s2">network status, offline storage</span><span class="s1">)</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Render Props</span><span class="s1">**: </span><span class="s2">Flexible component composition</span>
+
+<span class="s0">### </span><span class="s2">Design System</span>
+
+<span class="s1">**</span><span class="s2">Color Palette</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Primary</span><span class="s1">: </span><span class="s2">`#2563EB` </span><span class="s1">(</span><span class="s2">Blue</span><span class="s1">) </span><span class="s2">- CTAs, links, primary actions</span>
+<span class="s0">- </span><span class="s2">Success</span><span class="s1">: </span><span class="s2">`#10B981` </span><span class="s1">(</span><span class="s2">Green</span><span class="s1">) </span><span class="s2">- Approvals, success states</span>
+<span class="s0">- </span><span class="s2">Warning</span><span class="s1">: </span><span class="s2">`#F59E0B` </span><span class="s1">(</span><span class="s2">Orange</span><span class="s1">) </span><span class="s2">- Pending, warnings</span>
+<span class="s0">- </span><span class="s2">Danger</span><span class="s1">: </span><span class="s2">`#EF4444` </span><span class="s1">(</span><span class="s2">Red</span><span class="s1">) </span><span class="s2">- Rejections, errors</span>
+<span class="s0">- </span><span class="s2">Neutral</span><span class="s1">: </span><span class="s2">Gray scale for backgrounds and text</span>
+
+<span class="s1">**</span><span class="s2">Typography</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Font Family</span><span class="s1">: </span><span class="s2">Inter </span><span class="s1">(</span><span class="s2">via Google Fonts</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">Responsive font sizing via Tailwind utilities</span>
+<span class="s0">- </span><span class="s2">Semantic heading hierarchy </span><span class="s1">(</span><span class="s2">h1-h6</span><span class="s1">)</span>
+
+<span class="s1">**</span><span class="s2">Spacing System</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">Tailwind's 4px base spacing scale</span>
+<span class="s0">- </span><span class="s2">Consistent padding/margin patterns</span>
+<span class="s0">- </span><span class="s2">Responsive spacing modifiers</span>
+
+<span class="s1">**</span><span class="s2">Component Library</span><span class="s1">:**</span>
+<span class="s0">- </span><span class="s2">40+ UI components from Radix UI</span>
+<span class="s0">- </span><span class="s2">Material UI for complex data displays</span>
+<span class="s0">- </span><span class="s2">Custom-styled components using Tailwind</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Routing Architecture</span>
+
+<span class="s0">### </span><span class="s2">Route Structure</span>
+
+<span class="s0">```</span><span class="s4">typescript</span>
+<span class="s3">Route Hierarchy:</span>
+<span class="s3">/</span>
+<span class="s3">├── /                          # Welcome screen</span>
+<span class="s3">├── /app/*                     # Mobile application</span>
+<span class="s3">│   ├── /login</span>
+<span class="s3">│   ├── /register</span>
+<span class="s3">│   ├── /dashboard</span>
+<span class="s3">│   ├── /new-claim</span>
+<span class="s3">│   ├── /video-recording</span>
+<span class="s3">│   ├── /claim-details</span>
+<span class="s3">│   ├── /claim-submission</span>
+<span class="s3">│   ├── /processing/:claimId</span>
+<span class="s3">│   ├── /results/:claimId</span>
+<span class="s3">│   ├── /damage/:claimId</span>
+<span class="s3">│   ├── /settlement/:claimId</span>
+<span class="s3">│   ├── /history</span>
+<span class="s3">│   ├── /profile</span>
+<span class="s3">│   └── /settings</span>
+<span class="s3">└── /web/*                     # Web dashboard</span>
+    <span class="s3">├── /login</span>
+    <span class="s3">├── /dashboard</span>
+    <span class="s3">├── /claims</span>
+    <span class="s3">├── /fraud-analytics</span>
+    <span class="s3">├── /settlements</span>
+    <span class="s3">├── /team</span>
+    <span class="s3">└── /settings</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Navigation Features</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Mobile Navigation</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Bottom navigation bar on main screens</span>
+   <span class="s0">- </span><span class="s2">Back button navigation</span>
+   <span class="s0">- </span><span class="s2">Swipe gestures </span><span class="s1">(</span><span class="s2">settings sidebar</span><span class="s1">)</span>
+   <span class="s0">- </span><span class="s2">Deep linking to specific claims</span>
+
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Web Navigation</span><span class="s1">**</span>
+   <span class="s0">- </span><span class="s2">Persistent sidebar navigation</span>
+   <span class="s0">- </span><span class="s2">Breadcrumb trails</span>
+   <span class="s0">- </span><span class="s2">Mobile-responsive hamburger menu</span>
+   <span class="s0">- </span><span class="s2">Swipe-to-toggle sidebar </span><span class="s1">(</span><span class="s2">mobile web</span><span class="s1">)</span>
+
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Route Guards</span><span class="s1">** (</span><span class="s2">Future Enhancement</span><span class="s1">)</span>
+   <span class="s0">- </span><span class="s2">Authentication checks</span>
+   <span class="s0">- </span><span class="s2">Role-based access</span>
+   <span class="s0">- </span><span class="s2">Redirect logic for unauthorized access</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Future Scalability</span>
+
+<span class="s0">### </span><span class="s2">Backend Integration Readiness</span>
+
+<span class="s2">Current architecture supports seamless backend integration</span><span class="s1">:</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">API Layer</span><span class="s1">**: </span><span class="s2">Replace mock data with API calls</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Authentication</span><span class="s1">**: </span><span class="s2">JWT token management</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Real-time Updates</span><span class="s1">**: </span><span class="s2">WebSocket for live claim status</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Video Processing</span><span class="s1">**: </span><span class="s2">Stream upload to cloud storage </span><span class="s1">(</span><span class="s2">AWS S3, Cloudflare R2</span><span class="s1">)</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">AI Processing</span><span class="s1">**: </span><span class="s2">Integration with ML models for fraud detection</span>
+
+<span class="s0">### </span><span class="s2">Recommended Backend Stack</span>
+
+<span class="s0">```</span>
+<span class="s3">Technology Recommendations:</span>
+<span class="s3">- Backend: Node.js (Express/Fastify) or Python (FastAPI)</span>
+<span class="s3">- Database: PostgreSQL (relational) + Redis (caching)</span>
+<span class="s3">- Object Storage: AWS S3 / Cloudflare R2</span>
+<span class="s3">- ML Platform: TensorFlow Serving / AWS SageMaker</span>
+<span class="s3">- Real-time: WebSocket (Socket.io) or Server-Sent Events</span>
+<span class="s3">- Queue: Redis Queue / AWS SQS for async processing</span>
+<span class="s3">- CDN: Cloudflare for video delivery</span>
+<span class="s0">```</span>
+
+<span class="s0">### </span><span class="s2">Scalability Considerations</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Horizontal Scaling</span><span class="s1">**: </span><span class="s2">Stateless frontend, API gateway pattern</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Database Optimization</span><span class="s1">**: </span><span class="s2">Indexing on claim IDs, status fields</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Caching Strategy</span><span class="s1">**: </span><span class="s2">Redis for frequently accessed claims</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">CDN Integration</span><span class="s1">**: </span><span class="s2">Offload video delivery to CDN</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Microservices</span><span class="s1">**: </span><span class="s2">Separate services for claim processing, fraud detection, payments</span>
+
+<span class="s0">### </span><span class="s2">Performance Optimizations</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Code Splitting</span><span class="s1">**: </span><span class="s2">Route-based lazy loading</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Image Optimization</span><span class="s1">**: </span><span class="s2">Responsive images, lazy loading</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Bundle Size</span><span class="s1">**: </span><span class="s2">Tree shaking, dependency optimization</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Caching</span><span class="s1">**: </span><span class="s2">Service worker for offline assets</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Video Compression</span><span class="s1">**: </span><span class="s2">Client-side video optimization before upload</span>
+
+<span class="s0">### </span><span class="s2">Mobile App Considerations</span>
+
+<span class="s2">Current web app can be packaged as</span><span class="s1">:</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">PWA </span><span class="s1">(</span><span class="s2">Progressive Web App</span><span class="s1">)**: </span><span class="s2">Install on mobile devices</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">React Native</span><span class="s1">**: </span><span class="s2">Reuse components with React Native Web</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Capacitor/Ionic</span><span class="s1">**: </span><span class="s2">Wrap as native app with device API access</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Monitoring &amp; Analytics </span><span class="s1">(</span><span class="s2">Future</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Recommended Monitoring</span>
+
+<span class="s0">1. </span><span class="s1">**</span><span class="s2">Error Tracking</span><span class="s1">**: </span><span class="s2">Sentry for frontend error monitoring</span>
+<span class="s0">2. </span><span class="s1">**</span><span class="s2">Analytics</span><span class="s1">**: </span><span class="s2">Google Analytics / Mixpanel for user behavior</span>
+<span class="s0">3. </span><span class="s1">**</span><span class="s2">Performance</span><span class="s1">**: </span><span class="s2">Lighthouse CI, Web Vitals monitoring</span>
+<span class="s0">4. </span><span class="s1">**</span><span class="s2">Uptime</span><span class="s1">**: </span><span class="s2">Pingdom / UptimeRobot for availability</span>
+<span class="s0">5. </span><span class="s1">**</span><span class="s2">Logs</span><span class="s1">**: </span><span class="s2">Centralized logging </span><span class="s1">(</span><span class="s2">ELK stack, Datadog</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">Key Metrics to Track</span>
+
+<span class="s0">- </span><span class="s2">Claim submission success rate</span>
+<span class="s0">- </span><span class="s2">Average fraud detection time</span>
+<span class="s0">- </span><span class="s2">Offline claim sync success rate</span>
+<span class="s0">- </span><span class="s2">User engagement </span><span class="s1">(</span><span class="s2">claims per user, session duration</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s2">System uptime and API latency</span>
+<span class="s0">- </span><span class="s2">Storage usage patterns</span>
+
+<span class="s0">---</span>
+
+<span class="s0">## </span><span class="s2">Conclusion</span>
+
+<span class="s2">The AIVALA Insurance Claim Platform is built with a modern, scalable, and user-centric architecture. Key strengths include</span><span class="s1">:</span>
+
+<span class="s2">✅ </span><span class="s1">**</span><span class="s2">Offline-First</span><span class="s1">**: </span><span class="s2">Handles intermittent connectivity gracefully  </span>
+<span class="s2">✅ </span><span class="s1">**</span><span class="s2">Modular Design</span><span class="s1">**: </span><span class="s2">Easy to extend and maintain  </span>
+<span class="s2">✅ </span><span class="s1">**</span><span class="s2">Comprehensive UI</span><span class="s1">**: </span><span class="s2">51 reusable components  </span>
+<span class="s2">✅ </span><span class="s1">**</span><span class="s2">Type Safety</span><span class="s1">**: </span><span class="s2">TypeScript for robust development  </span>
+<span class="s2">✅ </span><span class="s1">**</span><span class="s2">Responsive</span><span class="s1">**: </span><span class="s2">Works across mobile and web  </span>
+<span class="s2">✅ </span><span class="s1">**</span><span class="s2">Performance</span><span class="s1">**: </span><span class="s2">Optimized with Vite and code splitting  </span>
+<span class="s2">✅ </span><span class="s1">**</span><span class="s2">Security</span><span class="s1">**: </span><span class="s2">Privacy-aware with clear user controls  </span>
+
+<span class="s2">The platform is ready for backend integration and can scale to handle production workloads with appropriate infrastructure.</span>
+
+<span class="s0">---</span>
+
+<span class="s1">**</span><span class="s2">Document Version</span><span class="s1">**: </span><span class="s2">1.0  </span>
+<span class="s1">**</span><span class="s2">Last Updated</span><span class="s1">**: </span><span class="s2">April 27, 2026  </span>
+<span class="s1">**</span><span class="s2">Platform</span><span class="s1">**: </span><span class="s2">AIVALA Insurance Claim Platform</span>
+</pre>
+</body>
+</html>

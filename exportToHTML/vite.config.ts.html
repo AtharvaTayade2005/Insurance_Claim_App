@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>vite.config.ts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #56a8f5;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+vite.config.ts</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s2">{ defineConfig } </span><span class="s0">from </span><span class="s2">'</span><span class="s3">vite</span><span class="s2">'</span>
+<span class="s0">import </span><span class="s2">path </span><span class="s0">from </span><span class="s2">'</span><span class="s3">path</span><span class="s2">'</span>
+<span class="s0">import </span><span class="s2">tailwindcss </span><span class="s0">from </span><span class="s2">'</span><span class="s3">@tailwindcss/vite</span><span class="s2">'</span>
+<span class="s0">import </span><span class="s2">react </span><span class="s0">from </span><span class="s2">'</span><span class="s3">@vitejs/plugin-react</span><span class="s2">'</span>
+
+
+<span class="s0">function </span><span class="s4">figmaAssetResolver</span><span class="s2">() {</span>
+  <span class="s0">return </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: '</span><span class="s3">figma-asset-resolver</span><span class="s2">',</span>
+    <span class="s4">resolveId</span><span class="s2">(id) {</span>
+      <span class="s0">if </span><span class="s1">(</span><span class="s2">id.</span><span class="s4">startsWith</span><span class="s1">(</span><span class="s2">'</span><span class="s3">figma:asset/</span><span class="s2">'</span><span class="s1">)) </span><span class="s2">{</span>
+        <span class="s0">const </span><span class="s2">filename = id.</span><span class="s4">replace</span><span class="s1">(</span><span class="s2">'</span><span class="s3">figma:asset/</span><span class="s2">', ''</span><span class="s1">)</span>
+        <span class="s0">return </span><span class="s2">path.</span><span class="s4">resolve</span><span class="s1">(</span><span class="s2">__dirname, '</span><span class="s3">src/assets</span><span class="s2">', filename</span><span class="s1">)</span>
+      <span class="s2">}</span>
+    <span class="s2">},</span>
+  <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">export default </span><span class="s4">defineConfig</span><span class="s1">(</span><span class="s2">{</span>
+  <span class="s1">plugins</span><span class="s2">: </span><span class="s1">[</span>
+    <span class="s4">figmaAssetResolver</span><span class="s1">()</span><span class="s2">,</span>
+    <span class="s2">// </span><span class="s5">The React and Tailwind plugins are both required for Make, even if</span>
+    <span class="s2">// </span><span class="s5">Tailwind is not being actively used – do not remove them</span>
+    <span class="s4">react</span><span class="s1">()</span><span class="s2">,</span>
+    <span class="s4">tailwindcss</span><span class="s1">()</span><span class="s2">,</span>
+  <span class="s1">]</span><span class="s2">,</span>
+  <span class="s1">resolve</span><span class="s2">: {</span>
+    <span class="s1">alias</span><span class="s2">: {</span>
+      <span class="s2">// </span><span class="s5">Alias @ to the src directory</span>
+      <span class="s2">'</span><span class="s3">@</span><span class="s2">': path.</span><span class="s4">resolve</span><span class="s1">(</span><span class="s2">__dirname, '</span><span class="s3">./src</span><span class="s2">'</span><span class="s1">)</span><span class="s2">,</span>
+    <span class="s2">},</span>
+  <span class="s2">},</span>
+<span class="s2">}</span><span class="s1">)</span>
+</pre>
+</body>
+</html>
