@@ -10,7 +10,11 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
     implementation project(':capacitor-community-camera-preview')
+    implementation project(':capacitor-community-video-recorder')
+    implementation project(':capacitor-firebase-storage')
     implementation project(':capacitor-camera')
+    implementation project(':capacitor-filesystem')
+    implementation project(':capacitor-push-notifications')
 
 }
 

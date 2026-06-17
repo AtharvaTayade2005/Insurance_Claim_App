@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "220100384895",
+    "project_id": "cloud-implement",
+    "storage_bucket": "cloud-implement.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220100384895:android:d0ba7c87664f839826874a",
+        "android_client_info": {
+          "package_name": "com.saumi.aivala"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtX9QONmfqENqvsdueCXjVa7BnyPWMoJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
