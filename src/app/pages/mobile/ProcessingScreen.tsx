@@ -12,6 +12,7 @@ export default function ProcessingScreen() {
   const [progress, setProgress] = useState(0);
 
   const steps = [
+    { name: 'Uploading to Secure Cloud', desc: 'Syncing evidence with GCS' },
     { name: 'Extracting Video Frames', desc: 'Analyzing video content' },
     { name: 'Face Detection', desc: 'Verifying identity' },
     { name: 'Damage Analysis', desc: 'AI assessing damage' },
@@ -27,9 +28,9 @@ export default function ProcessingScreen() {
           setTimeout(() => navigate(`/app/results/${claimId}`), 500);
           return 100;
         }
-        return prev + 2;
+        return prev + 1; // Slower for video processing
       });
-    }, 100);
+    }, 150);
 
     return () => clearInterval(interval);
   }, [claimId, navigate]);

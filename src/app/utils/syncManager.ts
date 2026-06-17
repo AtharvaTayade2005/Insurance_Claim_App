@@ -80,14 +80,22 @@ class SyncManager {
 
   // Upload a single claim (simulated for now)
   private async uploadClaim(claim: OfflineClaim): Promise<boolean> {
-    // Simulate network request
+    console.log(`Starting cloud sync for claim: ${claim.id}`);
+
+    // PREREQUISITE: Firebase Storage Stub
+    // Logic to be implemented:
+    // await FirebaseStorage.uploadFile({
+    //   path: `claims/${claim.id}/video.mp4`,
+    //   uri: claim.videoUrl,
+    // });
+
     return new Promise((resolve) => {
       setTimeout(() => {
-        // Simulate 90% success rate
-        const success = Math.random() > 0.1;
-        console.log(`Upload ${claim.id}: ${success ? 'success' : 'failed'}`);
+        // Simulate higher success rate for the demo
+        const success = Math.random() > 0.05;
+        console.log(`Cloud Upload ${claim.id}: ${success ? 'success' : 'failed'}`);
         resolve(success);
-      }, 2000);
+      }, 3000);
     });
   }
 
