@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 
 import { VideoRecorder } from "@capacitor-community/video-recorder";
 import { Filesystem } from "@capacitor/filesystem";
+import { FirebaseStorage } from "@capacitor-firebase/storage";
 
 import { Button } from "@/app/components/ui/button";
 import { Card } from "@/app/components/ui/card";
@@ -35,6 +36,7 @@ export default function VideoRecording() {
   const [progress, setProgress] = useState(0);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [videoSize, setVideoSize] = useState<number | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const progressInterval = useRef<NodeJS.Timeout | null>(null);
 
@@ -123,7 +125,7 @@ export default function VideoRecording() {
   };
 
   // 🚀 CONTINUE + SAVE CLAIM
-  const handleContinue = () => {
+  const handleContinue = async () => {
 
     if (!videoUrl) {
       toast.error("Please capture video first");
@@ -135,29 +137,43 @@ export default function VideoRecording() {
       return;
     }
 
-    // old claims
-    const existingClaims = JSON.parse(localStorage.getItem("claims") || "[]");
+    try {
+      setIsUploading(true);
+      const claimId = `CLM-${Date.now()}`;
 
-    // new claim
-    const claimId = `CLM-${Date.now()}`;
-    const newClaim = {
-      id: claimId,
-      type: "Auto",
-      status: "processing",
-      date: "Just now",
-      videoUrl: videoUrl,
-      createdAt: new Date().toISOString(),
-    };
+      toast.loading("Uploading evidence to Google Cloud...");
 
-    // add newest first
-    existingClaims.unshift(newClaim);
+      // ☁️ ACTUAL GCS UPLOAD
+      await FirebaseStorage.uploadFile({
+        path: `claims/${claimId}.mp4`,
+        uri: videoUrl
+      });
 
-    // save claims
-    localStorage.setItem("claims", JSON.stringify(existingClaims));
+      // local save
+      const existingClaims = JSON.parse(localStorage.getItem("claims") || "[]");
+      const newClaim = {
+        id: claimId,
+        type: "Auto",
+        status: "processing",
+        date: "Just now",
+        videoUrl: videoUrl,
+        createdAt: new Date().toISOString(),
+      };
+      existingClaims.unshift(newClaim);
+      localStorage.setItem("claims", JSON.stringify(existingClaims));
 
-    toast.success("Claim submitted");
+      toast.dismiss();
+      toast.success("Upload successful! Claim submitted.");
+      navigate(`/app/processing/${claimId}`);
 
-    navigate(`/app/processing/${claimId}`);
+    } catch (error) {
+      console.error("Upload error:", error);
+      toast.dismiss();
+      toast.error("Cloud upload failed. Using offline mode.");
+      navigate(`/app/processing/CLM-OFFLINE`);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
