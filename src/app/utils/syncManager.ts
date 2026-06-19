@@ -224,11 +224,15 @@ class SyncManager {
 
       if (response.ok) {
         console.log("Email alert dispatched successfully.");
+        toast.success("Alert email sent successfully to your inbox!");
       } else {
-        console.error("EmailJS dispatch returned error status:", response.status, await response.text());
+        const errText = await response.text();
+        console.error("EmailJS dispatch returned error status:", response.status, errText);
+        toast.error(`Email alert failed (status ${response.status}): ${errText}`);
       }
     } catch (error) {
       console.error("Error dispatching EmailJS notification:", error);
+      toast.error(`Failed to send email alert: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 }
