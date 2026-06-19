@@ -188,9 +188,9 @@ class SyncManager {
   private async sendEmailAlert(claim: OfflineClaim) {
     try {
       // Config credentials (Replace these placeholder strings with your actual EmailJS dashboard values)
-      const EMAILJS_SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID";
-      const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
-      const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+      const EMAILJS_SERVICE_ID = "service_fpj8bkn";
+      const EMAILJS_TEMPLATE_ID = "template_jpwkgkc";
+      const EMAILJS_PUBLIC_KEY = "aJdviXYuwZtbVodb-";
 
       if (
         EMAILJS_SERVICE_ID === "YOUR_EMAILJS_SERVICE_ID" ||
