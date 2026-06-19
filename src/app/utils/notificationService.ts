@@ -1,11 +1,19 @@
 import { PushNotifications } from '@capacitor/push-notifications';
 import { toast } from 'sonner';
+import { Capacitor } from '@capacitor/core';
 
 class NotificationService {
   private isInitialized = false;
 
   async init() {
     if (this.isInitialized) return;
+
+    // Push notifications are not supported on the web platform
+    if (Capacitor.getPlatform() === 'web') {
+      console.log('Skipping push notifications initialization on web platform.');
+      this.isInitialized = true;
+      return;
+    }
 
     try {
       // Request permissions
