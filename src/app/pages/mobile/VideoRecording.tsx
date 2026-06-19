@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import { VideoRecorder } from "@capacitor-community/video-recorder";
 import { Filesystem } from "@capacitor/filesystem";
-import { FirebaseStorage } from "@capacitor-firebase/storage";
+import { FirebaseFirestore } from "@capacitor-firebase/firestore";
 
 import { Button } from "@/app/components/ui/button";
 import { Card } from "@/app/components/ui/card";
@@ -141,12 +141,18 @@ export default function VideoRecording() {
       setIsUploading(true);
       const claimId = `CLM-${Date.now()}`;
 
-      toast.loading("Uploading evidence to Google Cloud...");
+      toast.loading("Syncing evidence log with Google Cloud...");
 
-      // ☁️ ACTUAL GCS UPLOAD
-      await FirebaseStorage.uploadFile({
-        path: `claims/${claimId}.mp4`,
-        uri: videoUrl
+      // 🔥 Firestore Cloud Sync (Free on Spark Plan)
+      await FirebaseFirestore.addDocument({
+        reference: "evidence_logs",
+        data: {
+          claimId: claimId,
+          status: "Video Captured",
+          timestamp: new Date().toISOString(),
+          location: "Mobile Evidence Collection",
+          type: "Auto Insurance"
+        }
       });
 
       // local save
@@ -163,14 +169,14 @@ export default function VideoRecording() {
       localStorage.setItem("claims", JSON.stringify(existingClaims));
 
       toast.dismiss();
-      toast.success("Upload successful! Claim submitted.");
+      toast.success("Cloud Sync Successful!");
       navigate(`/app/processing/${claimId}`);
 
     } catch (error) {
-      console.error("Upload error:", error);
+      console.error("Cloud Sync error:", error);
       toast.dismiss();
-      toast.error("Cloud upload failed. Using offline mode.");
-      navigate(`/app/processing/CLM-OFFLINE`);
+      toast.error("Cloud sync failed. Data saved locally.");
+      navigate(`/app/processing/CLM-LOCAL`);
     } finally {
       setIsUploading(false);
     }

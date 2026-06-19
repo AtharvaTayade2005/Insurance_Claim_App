@@ -10,6 +10,7 @@
   "dependencies": {
     "@capacitor-community/camera-preview": "^8.0.1",
     "@capacitor-community/video-recorder": "^7.5.0",
+    "@capacitor-firebase/firestore": "^8.3.0",
     "@capacitor-firebase/storage": "^8.3.0",
     "@capacitor/android": "^8.3.4",
     "@capacitor/camera": "^8.2.0",
