@@ -282,30 +282,36 @@ export default function VideoRecording() {
 
       toast.loading("Syncing evidence log with Google Cloud...");
 
-      // 🔥 Cloud Sync Firestore
-      if (isWeb) {
-        if (db) {
-          await addDoc(collection(db, "evidence_logs"), {
-            claimId: claimId,
-            status: "Video Captured",
-            timestamp: new Date().toISOString(),
-            location: "Mobile Evidence Collection",
-            type: "Auto Insurance"
-          });
-        } else {
-          console.warn("Firestore not configured, skipping web Firestore doc creation.");
-        }
-      } else {
-        await FirebaseFirestore.addDocument({
-          reference: "evidence_logs",
-          data: {
-            claimId: claimId,
-            status: "Video Captured",
-            timestamp: new Date().toISOString(),
-            location: "Mobile Evidence Collection",
-            type: "Auto Insurance"
+      // 🔥 Cloud Sync Firestore (Non-blocking)
+      try {
+        if (isWeb) {
+          if (db) {
+            await addDoc(collection(db, "evidence_logs"), {
+              claimId: claimId,
+              status: "Video Captured",
+              timestamp: new Date().toISOString(),
+              location: "Mobile Evidence Collection",
+              type: "Auto Insurance"
+            });
+            console.log("Firestore evidence log created successfully.");
+          } else {
+            console.warn("Firestore not configured, skipping web Firestore doc creation.");
           }
-        });
+        } else {
+          await FirebaseFirestore.addDocument({
+            reference: "evidence_logs",
+            data: {
+              claimId: claimId,
+              status: "Video Captured",
+              timestamp: new Date().toISOString(),
+              location: "Mobile Evidence Collection",
+              type: "Auto Insurance"
+            }
+          });
+          console.log("Capacitor Firestore evidence log created successfully.");
+        }
+      } catch (dbError) {
+        console.warn("Firestore database write failed (possibly due to rules or setup), but continuing with GCS upload:", dbError);
       }
 
       // Prepare claim object to queue for cloud sync (GCS upload)
