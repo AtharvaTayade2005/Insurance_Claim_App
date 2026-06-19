@@ -61,6 +61,9 @@ class SyncManager {
           offlineStorage.deleteClaim(claimId);
           successCount++;
 
+          // Dispatch email alert asynchronously in background
+          this.sendEmailAlert(claim);
+
           notificationService.sendLocalNotification(
             "Upload Complete",
             `Claim ${claimId} has been successfully uploaded to the cloud.`
@@ -179,6 +182,54 @@ class SyncManager {
   // Check if currently syncing
   isSyncInProgress(): boolean {
     return this.isSyncing;
+  }
+
+  // Send automated email alert upon successful GCS upload
+  private async sendEmailAlert(claim: OfflineClaim) {
+    try {
+      // Config credentials (Replace these placeholder strings with your actual EmailJS dashboard values)
+      const EMAILJS_SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID";
+      const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
+      const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+
+      if (
+        EMAILJS_SERVICE_ID === "YOUR_EMAILJS_SERVICE_ID" ||
+        EMAILJS_TEMPLATE_ID === "YOUR_EMAILJS_TEMPLATE_ID" ||
+        EMAILJS_PUBLIC_KEY === "YOUR_EMAILJS_PUBLIC_KEY"
+      ) {
+        console.warn("EmailJS credentials are not configured in syncManager.ts yet. Skipping email alert.");
+        return;
+      }
+
+      console.log(`Dispatching EmailJS notification for claim ${claim.id}...`);
+
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: {
+            claimId: claim.id,
+            status: claim.status,
+            timestamp: claim.createdAt,
+            platform: Capacitor.getPlatform(),
+            gcsPath: `claims/${claim.id}/inspection_video.mp4`
+          }
+        })
+      });
+
+      if (response.ok) {
+        console.log("Email alert dispatched successfully.");
+      } else {
+        console.error("EmailJS dispatch returned error status:", response.status, await response.text());
+      }
+    } catch (error) {
+      console.error("Error dispatching EmailJS notification:", error);
+    }
   }
 }
 
