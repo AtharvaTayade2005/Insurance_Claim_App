@@ -5,6 +5,7 @@ import { offlineStorage, OfflineClaim } from './offlineStorage';
 import { toast } from 'sonner';
 import { FirebaseStorage } from '@capacitor-firebase/storage';
 import { notificationService } from './notificationService';
+import { Capacitor } from '@capacitor/core';
 
 class SyncManager {
   private isSyncing = false;
@@ -89,8 +90,6 @@ class SyncManager {
     console.log(`Starting cloud sync for claim: ${claim.id}`);
 
     try {
-      // ACTUAL CLOUD UPLOAD LOGIC
-      // Note: claim.videoBlob in OfflineClaim currently holds the path/uri
       const videoUri = claim.videoBlob;
 
       if (!videoUri) {
@@ -98,10 +97,47 @@ class SyncManager {
         return false;
       }
 
-      await FirebaseStorage.uploadFile({
-        path: `claims/${claim.id}/inspection_video.mp4`,
-        uri: videoUri,
-      });
+      if (Capacitor.getPlatform() === 'web') {
+        console.log("Performing Web Firebase Storage upload...");
+        // On web, import standard Firebase SDK methods and bucket
+        const { ref: storageRef, uploadBytesResumable } = await import('firebase/storage');
+        const { storage } = await import('./firebase');
+
+        if (!storage) {
+          throw new Error("Firebase Web Storage is not initialized.");
+        }
+
+        // Fetch the blob from the object URL or base64 URI
+        const response = await fetch(videoUri);
+        const blob = await response.blob();
+
+        const fileRef = storageRef(storage, `claims/${claim.id}/inspection_video.mp4`);
+        const uploadTask = uploadBytesResumable(fileRef, blob);
+
+        await new Promise<void>((resolve, reject) => {
+          uploadTask.on(
+            'state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log(`Web Upload progress: ${progress.toFixed(1)}%`);
+            },
+            (error) => {
+              console.error("Web Upload failed:", error);
+              reject(error);
+            },
+            () => {
+              console.log("Web Upload finished successfully");
+              resolve();
+            }
+          );
+        });
+      } else {
+        console.log("Performing Native Capacitor Firebase Storage upload...");
+        await FirebaseStorage.uploadFile({
+          path: `claims/${claim.id}/inspection_video.mp4`,
+          uri: videoUri,
+        });
+      }
 
       console.log(`Cloud Upload ${claim.id}: SUCCESS`);
       return true;
